@@ -1,0 +1,172 @@
+* programming ruby
+** Preface
+*** Why Ruby?
+*** A Word about Ruby Versions
+*** Notation Conventions
+*** Road Map
+*** Resources
+** Acknowledgments
+** Part Ⅰ. Facets of Ruby
+*** Getting Started
+**** Installing Ruby
+**** Installing Ruby for Windows
+**** Running Ruby
+**** Creating Ruby Programs
+**** Getting More Information about Ruby
+**** What's Next
+*** Ruby.new
+**** Ruby Is an Object-Oriented Language
+**** Some Basic Ruby
+**** Arrays and Hashes
+**** Symbols
+**** Control Structures
+**** Regular Expressions
+**** Blocks
+**** Reading and 'Riting
+**** Command-Line Arguments
+**** Commenting Ruby
+**** What's Next
+*** Classes, Objects, and Variables
+**** Defining Classes
+**** Objects and Attributes
+**** Classes Working with Other Classes
+**** Specifying Access Control
+**** Variables
+**** Reopening Classes
+**** What's Next
+*** Collections, Blocks, and Iterators
+**** Arrays
+**** Hashes
+**** Digging
+**** Word Frequency: Using Hashes and Arrays
+**** Block and Enumeration
+**** What's Next
+*** More about Methods
+**** Defining a Method
+**** Calling a Method
+**** What's Next
+*** Sharing Functionality: Inheritance, Modules, and Mixins
+**** Inheritance and Messages
+**** Modules
+**** Inheritance, Mixins, and Design
+**** What's Next
+*** Basic Types: Numbers, Strings, and Ranges
+**** Numbers
+**** Strings
+**** Ranges
+**** What's Next
+*** Regular Expressions
+**** What Regular Expressions Let You Do
+**** Creating and Using Regular Expressions
+**** Regular Expression Patterns
+**** Regular Expression Syntax
+**** What's Next
+*** Expressions
+**** Operator Expressions
+**** Command Expressions
+**** Assignment
+**** Conditional Execution
+**** Loops and Iterators
+**** Pattern Matching
+**** What's Next
+*** Exceptions
+**** The Exception Class
+**** Handling Exceptions
+**** Raising Exceptions
+**** Using Catch and Throw
+**** What's Next
+*** Basic Input and Output
+**** What Is an I/O Object?
+**** Opening and Closing Files
+**** Reading and Writing Files
+**** Talking to Networks
+**** What's Next
+*** Threads, Fibers, and Ractors
+**** Multithreading with Threads
+**** Running Multiple External Processes
+**** Creating Fibers
+**** Understanding Ractors
+**** What's Next
+*** Testing Ruby Code
+**** Why Unit Test?
+**** Testing with Minitest
+**** structuring Tests
+**** Creating Mock Objects in Minitest
+**** Organizing and Running Tests
+**** Testing with RSpec
+**** What's Next
+** Part Ⅱ. Ruby in Its Setting
+*** Ruby from the Command Line
+**** Calling the Ruby Command
+**** Ruby Command-Line Options
+**** Making Your Code an Executable Program
+**** Processing Command-Line Arguments to Your Code
+**** Accessing Environment Variables
+**** Where Ruby Finds Its Libraries
+**** Using the Rake Build Tool
+**** The Build Environment
+**** What's Next
+*** Ruby Gems
+**** Installing and Managing Gems
+**** Using Bundler to Manager Groups of Gems
+**** Writing and Packaging Your Own Code into Gems
+**** Organizing Your Source Code
+**** Distributing and Installing Your Code
+**** What's Next
+*** Interactive Ruby
+**** Using irb
+**** Navigating irb
+**** Configuring irb
+**** What's Next
+*** Debugging Ruby
+**** Printing Things
+**** The Ruby Debugger
+**** Pry
+**** debugging Performance Issues with Benchmark
+**** What's Next
+*** Typed Ruby
+**** What's a Type?
+**** Official Ruby Typing with RBS
+**** Ruby Typing with Sorbet
+**** What's Next
+*** Documenting Ruby
+**** Documenting with RDoc
+**** Adding RDoc to Ruby Code
+**** Running RDoc
+**** Documenting with YARD
+**** What's Next
+** Part Ⅲ. Ruby Crystallized
+*** Ruby and the Web
+**** Ruby's Web Utilities
+**** Templating with ERB
+**** Serving Ruby Code to the Web
+**** Ruby in the Browser with Web Assembley
+**** What's Next
+*** Ruby Style
+**** Written Ruby Style
+**** Using RuboCop
+**** Using Standard
+**** Ruby Style in the Large
+**** Duck Typing
+Its' really?!!!
+**** What's Next
+*** The Ruby Object Model and Metaprogramming
+**** Understanding Objects and Classes
+**** Defining Singleton methods
+**** Inheritance and Visibility
+**** Modules and Mixins
+**** Metaprogramming Class-Level Macros
+**** Using instance eval and class eval
+**** Using Hook Methods
+**** A Metaprogramming Example
+**** Top-Level Execution Environment
+**** What's Next
+*** Reflection and Object Space
+**** Looking at Objects
+**** Looking at Classes
+**** Calling Methods Dynamically
+**** System Hooks
+**** Tracing Your Program's Execution
+**** Behind the Curtain: The Ruby VM
+**** Marshaling and Distributed Ruby
+**** What's Next

@@ -1,0 +1,148 @@
+* minishell                                                         :subject:
+** External functs
+`readline` `rl_clear_history`, `rl_on_new_line`,
+`rl_replace_line`, `rl_redisplay`, `add_history`,
+`printf`, `malloc`, `free`, `write`, `access`, `open`, `read`,
+`close`, `fork`, `wait`, `waitpid`, `wait3`, `wait4`, `signal`,
+`sigaction`, `sigemptyset`, `sigaddset`, `kill`, `exit`,
+`getcwd`, `chdir`, `stat`, `lstat`, `fstat`, `unlink`, `execve`,
+`dup`, `dup2`, `pipe`, `opendir`, `readdir`, `closedir`,
+`strerror`, `perror`, `isatty`, `ttyname`, `ttyslot`, `ioctl`,
+`getenv`, `tcsetattr`, `tcgetattr`, `tgetent`, `tgetflag`,
+`tgetnum`, `tgetstr`, `tgoto`, `tputs`
+** advance programming unix environment
+- no index
+  - `readline`
+    - ![man page](https://www.man7.org/linux/man-pages/man3/readline.3.html),
+  - `rl_clear_history`, `rl_on_new_line`, `rl_replace_line`, `rl_display`,
+    - ![ref page](https://tiswww.case.edu/php/chet/readline/readline.html#Command-Line-Editing)
+  - `add_history`,
+    - 하단 참조
+  - `ttyslot`, `tgetent`, `tgetflag`, `tgetnum`, `tgetstr`, `tgoto`, `tputs`
+- 1.7 오류처리
+  - `strerror`, `perror`
+- 3.3 open 함수와 openat 함수
+  - `open`
+- 3.5 close 함수
+  - `close`
+- 3.7 read 함수
+  - `read`
+- 3.8 write 함수
+  - `write`
+- 3.15 ioctl 함수
+  - `ioctl`
+- 3.12 dup 함수와 dup2 함수
+  - `dup`, `dup2`
+- 4.2 stat, fstat, fstatat, lstat 함수
+  - `stat`, `fstat`, `lstat`
+- 4.7 access함수와 faccessat 함수
+  - `access`
+- 4.15 link, linkat, unlink, unlinkat, remove 함수
+  - `unlink`
+- 4.22 디렉터리 읽기
+  - `opendir`, `readdir`, `closedir`
+- 4.23 chdir, fchdir, getcwd 함수
+  - `chdir`, `getcwd`
+- 5.11 서식화된 입출력
+  - `printf`
+- 7.8 Memory Allocation
+  - `malloc`, `free`
+- 7.9 환경변수
+  - `getenv`
+- 8.3 fork 함수
+  - `fork`
+- 8.5 exit 함수
+  - `exit`
+- 8.6 wait함수와 waitpid 함수
+  - `wait`, `waitpid`
+- 8.8 wait3 함수와 wait4 함수
+  - `wait3`, `wait4`
+- 8.10 exec류 함수들
+  - `execve`
+- 10.3 시그널 함수
+  - `signal`
+- 10.9 kill 함수와 raise 함수
+  - `kill`
+- 10.11 신호 집합
+  - `sigemptyset`, `sigaddset`
+- 10.14 sigaction 함수
+  - `sigaction`
+- 15.2 파이프
+  - `pipe`
+- 18.4 터미널 특성들의 조회와 설정
+  - `tcgetattr`, `tcsetattr`
+- 18.9 터미널 식별
+  - `isatty` `ttyname`
+** linux interface
+*** no index
+`readline` `rl_clear_history`, `rl_on_new_line`,
+`rl_replace_line`, `rl_redisplay`, `add_history`,
+`printf`, 'ttyslot', 'tgetent', 'tgetflag', 'tgetnum', 'tgetstr', 'tgoto', 'tputs'
+*** 25.2 터미널 속성값 읽기와 수정
+**** tcgetattr()
+**** tcsetattr()
+*** 7.1.2 힙에 메모리 할당하기: malloc()과 free() [225p]
+**** malloc()
+**** free()
+*** 4.5 파일에 쓰기: write() [150p]
+**** write()
+*** 15.4.4 파일 접근권 검사: access() [422p]
+**** access()
+*** 4.3 파일 열기: open() [141p]
+**** open()
+*** 4.4 파일 읽기: read() [149p]
+**** read()
+*** 4.6 파일 닫기: close() [151p]
+**** close()
+*** 24.2 새 프로세스의 생성: fork() [688p]
+**** fork()
+*** 26.1.1 wait() 시스템 호출 [720p]
+**** wait()
+*** 26.1.2 waitpid() 시스템 호출 [722p]
+**** waitpid()
+*** 26.1.6 wait3()와 wait4() 시스템 호출 [732p]
+**** wait3()
+**** wait4()
+*** 20.3 시그널 속성 변경: signal() [542p]
+**** signal()
+*** 20.13 시그널 속성 변경: sigaction() [565p]
+**** sigaction()
+*** 20.9 시그널 집합 [554p]
+**** sigemptyset()
+**** sigaddset()
+*** 20.5 시그널 전송: kill()
+**** kill()
+*** 25.1 프로세스 종료하기: _exit()와 exit()
+**** exit()
+*** 18.10 프로세스의 현재 작업 디렉토리
+**** getcwd()
+**** chdir()
+*** 15.1 파일 정보 호출: stat()
+**** stat()
+**** lstat()
+**** fstat()
+*** 18.3 (하드) 링크 생성과 제거: link()와 unlink()
+**** unlink()
+*** 27.1 새 프로그램 실행하기: execve()
+**** execve()
+*** 5.5 파일 디스크립터 복사하기 [171p]
+**** dup()
+**** dup2()
+*** 7.2 파이프 만들기와 사용하기 [169p]
+**** pipe()
+*** 18.8 디렉터리 읽기: opendir()와 readdir()
+**** opendir()
+**** readdir()
+**** closedir()
+*** 시스템 호출 에러 처리 [112p]
+**** strerror()
+**** perror()
+*** 25.10 터미널 식별 [2-699p]
+**** isatty()
+**** ttyname()
+*** 4.8 범용 I/O 모델 외의 오퍼레이션: ioctl()
+**** ioctl()
+*** 6.7 환경변수목록
+**** getenv()
+** test
+#+transclude: [[file:../book/programming-ruby.org::*Duck Typing]]
