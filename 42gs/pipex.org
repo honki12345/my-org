@@ -1,0 +1,32 @@
+* pipex
+** Mandatory part
+| key              | value                                |
+|------------------+--------------------------------------|
+| program name     | pipex                                |
+| turn in files    | Makefile, *.h, *.c                   |
+| makefile         | NAME, all, clean, fclean, re         |
+| arguments        | file1 cmd1 cmd2 file2                |
+| external functs. | -                                    |
+| libft authorized | yes                                  |
+| description      | this project is about handling pipes |
+
+
+*** External functs.
+- open, close, read, write
+  malloc, free, perror,
+  strerror, access, dup, dup2,
+  execve, exit, fork, pipe,
+  unlink, wait, waitpid
+- ft_printf and any equivalent YOU coded
+*** `./pipex file1 cmd1 cmd2 file2`
+- 'file1' and 'file2' are file names
+- 'cmd1' and 'cmd2' are shell commands with their parameters
+*** Examples
+` < file1 cmd1 | cmd2 > file2`
+
+`./pipex infile "ls -l" "wc -l" outfile
+- `< infile ls -l | wc -l > outfile`
+
+`./pipex infile "grep a1" "wc-w" outfile
+- `< infile grep a1 | wc -w > outfile`
+
