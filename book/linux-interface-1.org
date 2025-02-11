@@ -493,7 +493,7 @@ stat()와 lstat() 시스템 호출은 파일 자체에 권한을 요구하지 �
     time_t st_mtime; /* 마지막 파일 수정 시간 */
     time_t st_ctime; /* 마지막 상태 변경시간 */
 #+end_src
-*** 파일 타이스탬프
+*** 파일 타임스탬프
 **** utime()과 utimes()을 이용한 파일 타임스탬프 변경
 **** ultimensat()과 futimens()를 이용한 파일 타임스탬프 변경
 *** 파일 소유권
