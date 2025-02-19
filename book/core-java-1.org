@@ -14,7 +14,7 @@ The second volume, *Core Java, Volume 2: Advanced Features*, goes further into t
 *** Conventions
 *** Sample Code
 ** Acknowledgments
-** An Introduction to Java
+** An Introduction to Java 1
 *** Java as a Programming Platform
 Java is a whole *platform*, with a huge library, containing lots of reusable code, and an execution environment that provides services such as security, portability across operating systems, and automatic garbage collection
 *** The Java "White Paper" Buzzwords
@@ -33,7 +33,7 @@ The syntax for Java is, indeed, a cleaned-up version of C++ syntax
 *** Java Applets and the Internet
 *** A Short History of Java
 *** Common Misconceptions about Java
-** The Java Programming Environment
+** The Java Programming Environment 15
 how to install JDK
 how to compile
 how to run Java programs
@@ -61,7 +61,7 @@ depending on the provider, the Java Development Kit may have a brand name, such 
 The compiler requires a *file name*(~Welcome.java~). When you run the program, you specify a *class name*(~Welcome~) without a ~.java~ or ~.class~ extension
 *** Using an Integrated Development Environment
 *** JShell
-** Fundamental Programming Structures in Java
+** Fundamental Programming Structures in Java 31
 *** A Simple Java Program
 Java *is case sensitive*
 if you made any mistakes in capitalization, the program will not run
@@ -167,14 +167,95 @@ some Unicode characters can be decribed with *one* ~char~ value, and other Unico
 
 Literal values of type ~char~ are enclosed in single quotes
 Values of type ~char~ can be expressed as hexadecimal values that run from `\u0000` to `\uFFFF`
+The ~\u~ escape sequence(but none of the other escape sequences) can even be used *outside* quoted character constants and strings
+Unicode escape sequences are processed before the code is parsed
+
+You can have any number of ~u~ in a Unicode escape sequence
+
+Escape Sequences for Special Characters
+| Escape Sequence | Name                                                     |
+|-----------------+----------------------------------------------------------|
+| \b              | Backspace                                                |
+| \t              | Tab                                                      |
+| \n              | Line feed                                                |
+| \r              | Carriage return                                          |
+| \f              | Form feed                                                |
+| \"              | Double quote                                             |
+| \'              | Single quote                                             |
+| \\              | Backslash                                                |
+| \s              | Space. Used in text blocks to retain trailing whitespace |
+| \newline        | In text blocks only: Join this line with the next        |
+**** Unicode and the ~char~ Type
+There were many different character encoding standards: ASCII, ISO 8859-1 ...
+This caused two problems
+- A particular code value corresponds to different letters in the different encoding schemes
+- The encodings for languages with large character sets have variable length
+~Unicode~ was designed to solve both problems: a fixed 2-byte code
+~Java~ was designed from the ground up *to use 16-bit Unicode characters*
+Now, the 16-bit ~char~ type is *insufficient* to decribe all Unicode characters
+
+A *code point* is an integer value associated with a character in an encoding scheme
+In the Unicode standard, code points are written in hexadecimal and prefixed with U+, such U+0041
+A Unicode has code points that are grouped into 17 *code planes*, each holding 65536 characters
+
+How a Unicode code point(that is, an integer ranging from 0 to hexadecimal 10FFF) is represented in bits depends on the *character encoding*
+Java strings use the UTF-16 encoding
+It encodes all Unicode code points in a variable-length code of 16-bit units, called *code units*
+The characters in the basic multilingual plane are encoded as a single code unit.
+All other characters are encoded as consecutive pairs of code units
+Each of the code units in such an encoding pair falls into a range of 2048 unused values of the basic multilingual plane, called the *surrogates area*(`\uD800` to `\uDBFF` for the first code unit, `\uDC00` to `\uDFFF` for the second code unit)
+you can immediately tell whether a code unit encodes a single character or it is the first or second part of supplementary character
+
+Nowadays, Unicode has become so complex
+with languages whose characters are made from smaller building blocks, with emojis that can have modifiers for gender and skine tone
+**** The ~boolean~ Type
+The ~boolean~ type has two values, ~false~ and ~true~
+
+You cannot convert between integers and ~boolean~ values
+
 *** Variables and Constants
+Variable are used to store values
+Constants are variables whose values don't change
+
+**** Declaring Variables
+In Java, every variable has a *type*
+
+The semicolon is necessary because a declaration is a complete Java statement, which must end in a semicolon
+
+The identifier for a variable name(as well as for other names) is made up of letters, digits, currency symbols, and "punctuation connectors"
+The first character cannot be a digit
+
+Even though ~$~ is a valid character in an identifier, you should not use it in your own code. It is intended for names that are generated by the Java compiler and other tools
+
+You can declare multiple variables on a single line
+If you declare each variable separately, your programs are easier to read
+**** Initializing Variables
+In Java, it is considered good style to declare variables as closely as possible to the point where they are first used
+**** Constants
+In Java, you use the keyword ~final~ to denote a constant
+
+The keyword ~final~ indicates that you can assign to the variable once, and then its value is *set once and for all*
+It is customary to name constants in all uppercase
+
+class constants
+**** Enumerated Types
+Sometimes, a variable should only hold a restricted set of values
+An enumerated type has a finite number of named values
+A variable of type enum can hold only one of the values listed in the type declaration, or the special value ~null~ that indicates that the variable is not set to any value at all
 *** Operators
+**** Arithmetic Operators
+~/~
+integer divison If both operands are integers, and floating-point divison
+Integer division by 0 raises an exception
+whereas floating-point division by 0 yields an infinite or NaN result
+
+When one of the operands of ~%~ is negative, so is the result
 *** Strings
 *** Input and Output
 *** Control Flow
 *** Big Numbers
 *** Arrays
-** Objects and Classes
+** Objects and Classes 127
 *** Introduction to Object-Oriented Programming
 *** Using Predefined Classes
 *** Defining Your Own Classes
@@ -186,7 +267,7 @@ Values of type ~char~ can be expressed as hexadecimal values that run from `\u00
 *** JAR Files
 *** Documentation Comments
 *** Class Design Hints
-** Inheritance
+** Inheritance 217
 *** Classes, Superclasses, and Subclasses
 *** Object: The Cosmic Superclass
 *** Generic Array Lists
@@ -198,20 +279,20 @@ Values of type ~char~ can be expressed as hexadecimal values that run from `\u00
 *** Pattern Matching
 *** Reflection
 *** Desing Hints for Inheritance
-** Interfaces, Lambda Expressions, and Inner Classes
+** Interfaces, Lambda Expressions, and Inner Classes 327
 *** Interfaces
 *** Lambda Expressions
 *** Inner Classes
 *** Service Loaders
 *** Proxies
-** Exceptions, Assertions, and Logging
+** Exceptions, Assertions, and Logging 403
 *** Dealing with Errors
 *** Catching Exceptions
 *** Tips for Using Exceptions
 *** Using Assertions
 *** Logging
 *** Debugging Tips
-** Generic Programming
+** Generic Programming 459
 *** Why Generic Programming
 *** Defining a Simple Generic Class
 *** Generic Methods
@@ -221,7 +302,7 @@ Values of type ~char~ can be expressed as hexadecimal values that run from `\u00
 *** Wildcard Types
 *** Restrictions and Limitations
 *** Reflection and Generics
-** Collections
+** Collections 511
 *** The Java Collections Framework
 *** Interfaces in the Collections Framework
 *** Concrete Collections
@@ -229,7 +310,7 @@ Values of type ~char~ can be expressed as hexadecimal values that run from `\u00
 *** Copies and Views
 *** Algorithms
 *** Legacy Collections
-** Concurrency
+** Concurrency 599
 *** Running Threads
 *** Thread States
 *** Thread Properties
@@ -238,14 +319,14 @@ Values of type ~char~ can be expressed as hexadecimal values that run from `\u00
 *** Thread-Safe Collections
 *** Asynchronous Computations
 *** Processes
-** Annotations
+** Annotations 711
 *** Using Annotations
 *** Defining Annotations
 *** Annotations in the JAVA API
 *** Processing Annotations at Runtime
 *** Source-Level Annotation Processing
 *** Bytecode Engineering
-** The Java Platform Module System
+** The Java Platform Module System 747
 *** The Module Concept
 *** Naming Modules
 *** The Modular "Hello, World!" Program
