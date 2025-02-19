@@ -85,9 +85,20 @@ The Java Language Specification is the official document that describes the java
 If the ~main~ method exits normally, the java program has the exit code ~0~ indicating successful completion
 To terminate the program with a different exit code, call ~System.exit(code)~.
 
-
 *** Comments
+- ~//~
+- ~/*~, ~*/~
+- ~/**~, ~*/~
+  - this comment is used to generate documentation automatically
 *** Data Types
+Java is a *strongly typed language*
+This means that every variable must have a declared type
+
+There are eight *primitive types* in Java.
+- Four of them are integer types
+- Two are floating-point number types
+- one is the character type used for UTF-16 code units in the Unicode encoding scheme
+- one is for truth values
 *** Variables and Constants
 *** Operators
 *** Strings
