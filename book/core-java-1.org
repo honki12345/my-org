@@ -250,7 +250,91 @@ Integer division by 0 raises an exception
 whereas floating-point division by 0 yields an infinite or NaN result
 
 When one of the operands of ~%~ is negative, so is the result
+**** Mathematical Functions and Constants
+The ~Math~ class contains an assortment of mathematical functions
+
+The methods in the ~Math~ class use the routines in the computer's floating-point unit for fastest performance
+If completely predictable results are more important than performance, use the ~StrictMath~ class instead
+
+The ~Math~ class provides several methods to make integer arithmetic safer (not over,underflow)
+**** Conversions between Numeric Types
+conversions *without* information loss
+- byte -> short
+- short -> int
+- char -> int
+- int -> double
+- int -> long
+- float -> double
+
+conversions *may* lose precision
+- int -> float
+- long -> float
+- long -> double
+
+conversion in a binary operator
+- if either of the operands is ~double~, the other one will be converted to a ~double~
+- if either of the operands is ~float~, the other one will be converted to a ~float~
+- if either of the operands is ~long~, the other one will be converted to a ~long~
+- if either of the operands is ~int~, the other one will be converted to a ~int~
+**** Casts
+Conversions in which loss of information is possible are done by means of *casts*
+
+~long~ can only be assigned to an ~int~ with an explicit cast because there is the possibility of information loss
+
+You cannot cast between ~boolean~ values and any numeric type
+**** Assignment
+If a compound assignment operator yields a value whose type is different from that of the left-hand side,
+then it is *coerced* to fit with no warning
+
+In Java, an assignment is an *expression*
+Many programmers find such nested assignments confusing and prefer to write them more clearly
+**** Increment and Decrement Operators
+The prefix form does the addition first; the postfix form evaluates to the old value of the variable
+Many programmers find this behavior confusing.
+In Java, using ~++~ inside expression is uncommon
+**** Relational and ~boolean~ Operators
+**** The Conditional Operator
+~?:~ operator that selects a value, depending on a Boolean expression
+**** Switch Expressions
+If you need to choose among more than two values, then you can use a ~switch~ expression, which was introduced in Java 14
+The expression following the ~switch~ keyword is called the *selector expression* and its value is the *selector*
+A ~case~ label must be a compile-time constant whose type matches the selector type
+You can provide multiple labels for each ~case~, separated by commas
+
+When you use the ~switch~ expression with enumerated constants, you need not supply the name of the enumeration in each label
+- it is deduced from the ~switch~ value
+
+It was legal to omit the ~default~ since there was a case for each possible value
+
+When the selector is an ~enum~, and you don't have cases for all constants, you need a ~default~
+A ~switch~ expression with an integer or ~String~ selector must always have a ~default~
+If the selector is ~null~, a ~NullPointerException~ is thrown.
+- If you want to avoid this possibility, add a ~case null~
+**** Bitwise Operators
+For any of the integer types, you have operators that can work directly with the bits that make up the integers
+This means that you can use masking technique to get at individual bits in a number
+
+The bitwise operators
+~&~ ("and") ~|~("or") ~^~("xor") ~~~("not"
+~>>~ ~<<~ operators which shift a bit pattern right of left
+- These operators are convenient when you need *to build up bit patterns* to do bit masking
+~>>>~ operator fills the top bits with zero, unlike ~>>~ which extends the sign bit into the top bits
+
+When applied to ~boolean~ values, the ~&~, ~|~ operators yield a ~boolean~ value
+
+The right-hand operand of the shift operators is reduced modulo32
+(unless the left-hand operand is a ~long~, in which case the right-hand operand is reduced modulo 64)
+- e.g. the value of ~1 << 35~ is the same as ~1 << 3~
+
+The ~Integer~ class has a number of static methods for bit-level operations
+**** Parentheses and Operator Hierarchy
+If no parentheses are used, operations are performed in the hierarchical order indicated
+Operators on the same level are processed from left to right, except for those that are right-associative
+
+Java does not have a comma operator unlike C or C++
+
 *** Strings
+Conceptually, Java strings
 *** Input and Output
 *** Control Flow
 *** Big Numbers
