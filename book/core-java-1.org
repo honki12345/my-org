@@ -335,6 +335,89 @@ Java does not have a comma operator unlike C or C++
 
 *** Strings
 Conceptually, Java strings
+**** Concatenation
+Java allows you to use ~+~ to join(concatenate) two strings
+
+When you concatenate a string with a value that is not a string, the latter is converted to a string
+
+If you need to put multiple strings together, separated by a delimiter, use the static ~join~ method
+
+The ~repeat~ method produces a string that repeats a given string a number of times
+
+**** Spitting Strings
+The ~split~ method splits a string into parts along a given boundary
+It yields an array
+The argument of the ~split~ method is a *regular expression*
+
+| Pattern     | Description                                |
+|-------------+--------------------------------------------|
+| "\\s+"      | Whitespace                                 |
+| "\\s*,\\s*" | Comma with optional whitespace             |
+| "\\."       | Period                                     |
+| \\PL+       | Any non-letters                            |
+| "\\R"       | Line breaks                                |
+| "\\b"       | Word boundaries                            |
+| "\\b{g}"    | Grapheme cluster boundaries (since Java 9) |
+Splitting along *grapheme cluster* boundaries breaks a string into what humans perceive as the constituent characters
+**** Indexes and Substrings
+Java strings are sequences of ~char~ values
+The ~char~ data type is used for representing Unicode code points in the UTF-16 encoding
+
+The ~length~ method yields the number of ~char~ values required for a given string
+
+The call ~s.charAt(n)~ returns the ~char~ value at position ~n~, where ~n~ is between ~0~ and ~s.length() - 1~
+These calls are not very useful
+
+You sometimes need to know where a substring is located in a string
+Use the ~indexOf~ method
+
+Do not hard-code the length of a string
+Always use the ~length~ method instead
+
+You can extract a substring from a larger string with the ~substring~ method of the ~String~ class
+#+begin_src java
+String greeting = "Hello, World!";
+int n = greeting.indexOf(",");
+String s = greeting.substring(0, n);
+#+end_src
+The second argument of ~substring~ is the first position that you *do not* want to copy
+
+**** Strings Are Immutable
+The ~String~ class gives no methods that led you *change* a character in an existing string
+
+Immutable strings have one great advantage: The compiler can arrange that strings are *shared*
+
+The designers of Java decided that the efficiency of sharing outweighs the inefficiency of string creation
+**** Testing Strings for Equality
+To test whether two strings are equal, use the ~equals~ method
+
+To test whether two strings are idential except for the upper/lowercase letter distinction, use the ~equalsIgnoreCase~ method
+
+Do *not* use the ~==~ operator to test whether two strings are equal
+It only determines whether or not the strings are stored in the same location
+**** Empty and Null Strings
+A ~String~ variable can also hold a special value, called ~null~, that indicates that no object is currently associated with the variable
+
+To test whether a string is ~null~, use
+#+begin_src java
+if (str == null)
+#+end_src
+**** The ~String~ API
+~java.lang.String~ 1.0
+- ~char charAt(int index)~
+  returns the code unit at the specified location. You probably don't want to call this method unless you are interested in low-level code units
+- ~int length()~
+  returns the number of code units of the string
+- ~boolean equals(Object other)~
+  returns ~true~ if the string equals ~other~
+- ~boolean equalsIgnoreCase(String other)~
+  return ~true~ if the string equals ~other~, except for upper/lowercase distinction
+- ~int compareTo(String other)~
+  returns a negative value if the string comes before ~other~ in dictionary order, positive value if the string comes after ~other~ in dictionary order, or ~0~ if the string are equal
+- ~boolean isEmpty()~ 6
+  ~boolean isBlank()~ 11
+  return ~true~ if the string is empty or consists of whitespace
+
 *** Input and Output
 *** Control Flow
 *** Big Numbers
