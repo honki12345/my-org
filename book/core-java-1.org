@@ -1,0 +1,183 @@
+#+title: Core Java 1
+
+* core java
+** About This eBook
+** Preface
+*** To the Reader
+I assume that you don't like books filled with toy examples
+My goal(writer) is to enable you to fully understand the Java language and library
+
+This first volume concentrates **on the fundamental concepts** of the Java language
+The second volume, *Core Java, Volume 2: Advanced Features*, goes further into the most import libraries
+
+*** A Tour of This Book
+*** Conventions
+*** Sample Code
+** Acknowledgments
+** An Introduction to Java
+*** Java as a Programming Platform
+Java is a whole *platform*, with a huge library, containing lots of reusable code, and an execution environment that provides services such as security, portability across operating systems, and automatic garbage collection
+*** The Java "White Paper" Buzzwords
+**** simple
+The syntax for Java is, indeed, a cleaned-up version of C++ syntax
+**** object-oriented
+**** distributed
+**** robust
+**** secure
+**** architecture-neutral
+**** portable
+**** interpreted
+**** high-performance
+**** multithreaded
+**** dynamic
+*** Java Applets and the Internet
+*** A Short History of Java
+*** Common Misconceptions about Java
+** The Java Programming Environment
+how to install JDK
+how to compile
+how to run Java programs
+*** Installing the Java Development Kit
+**** Downloading the JDK
+depending on the provider, the Java Development Kit may have a brand name, such as Temurin(Eclipse Foundation)
+
+| Name                     | Acronym | Explanation                                                                                                                |
+|--------------------------+---------+----------------------------------------------------------------------------------------------------------------------------|
+| Java Development Kit     | JDK     | The software for programmers who want to write Java Programs                                                               |
+| Java Runtime Environment | JRE     | Only supported unitl Java 8                                                                                                |
+| Standard Edition         | SE      |                                                                                                                            |
+| Micro Edition            | ME      |                                                                                                                            |
+| OpenJDK                  | -       | A free and open source implementation of Java SE                                                                           |
+| Hotspot                  | -       | The "just in time" compiler by Oracle                                                                                      |
+| OpenJ9                   | -       | jit by IBM                                                                                                                 |
+| GraalVM                  | -       | "ahead of time" compiler                                                                                                   |
+| Long Term Support        | LTS     | A release that is supported for multiple years                                                                             |
+| Eclipse                  | -       | A foundation that distributes open-source software                                                                         |
+| Termurin                 | -       | The brand name for the OpenJDK version that the Eclipse foundation distributes                                             |
+| Adoptium                 | -       | The project within the Eclipse Foundation that provides an OpenJDK version and infrastructure support for its distribution |
+**** Setting Up the JDK
+
+*** Using the Command-Line Tools
+The compiler requires a *file name*(~Welcome.java~). When you run the program, you specify a *class name*(~Welcome~) without a ~.java~ or ~.class~ extension
+*** Using an Integrated Development Environment
+*** JShell
+** Fundamental Programming Structures in Java
+*** A Simple Java Program
+Java *is case sensitive*
+if you made any mistakes in capitalization, the program will not run
+
+The keyword ~public~ is called an *access modifier*
+these modifiers control the level of access other parts of a program have to this code
+
+everything in a Java program lives inside a class
+
+you need to make the file name for the source code the same as the name of the *public class*, with the extension ~.java~ appended
+**** name of the class
+class names are nouns that start with an uppercase letter
+Names must begin with a letter, and after that, they can have any combination of letters and digits
+The length is essentially unlimited
+You cannot use a Java reserved word(such as ~public~ or ~class~)
+**** main method
+According to the Java language Specification, the ~main~ method must be declared ~public~`
+The Java Language Specification is the official document that describes the java language
+
+~main~ method does not return an "exit code" to the os
+If the ~main~ method exits normally, the java program has the exit code ~0~ indicating successful completion
+To terminate the program with a different exit code, call ~System.exit(code)~.
+
+
+*** Comments
+*** Data Types
+*** Variables and Constants
+*** Operators
+*** Strings
+*** Input and Output
+*** Control Flow
+*** Big Numbers
+*** Arrays
+** Objects and Classes
+*** Introduction to Object-Oriented Programming
+*** Using Predefined Classes
+*** Defining Your Own Classes
+*** Static Fields and Methods
+*** Method Parameters
+*** Object Construction
+*** Records
+*** Packages
+*** JAR Files
+*** Documentation Comments
+*** Class Design Hints
+** Inheritance
+*** Classes, Superclasses, and Subclasses
+*** Object: The Cosmic Superclass
+*** Generic Array Lists
+*** Object Wrappers and Autoboxing
+*** Methods with a Variable Number of Arguments
+*** Abstract Classes
+*** Enumeration Classes
+*** Sealed Classes
+*** Pattern Matching
+*** Reflection
+*** Desing Hints for Inheritance
+** Interfaces, Lambda Expressions, and Inner Classes
+*** Interfaces
+*** Lambda Expressions
+*** Inner Classes
+*** Service Loaders
+*** Proxies
+** Exceptions, Assertions, and Logging
+*** Dealing with Errors
+*** Catching Exceptions
+*** Tips for Using Exceptions
+*** Using Assertions
+*** Logging
+*** Debugging Tips
+** Generic Programming
+*** Why Generic Programming
+*** Defining a Simple Generic Class
+*** Generic Methods
+*** Bounds for Type Variables
+*** Generic Code and the Virtual Machine
+*** Inheritance Rules for Generic Types
+*** Wildcard Types
+*** Restrictions and Limitations
+*** Reflection and Generics
+** Collections
+*** The Java Collections Framework
+*** Interfaces in the Collections Framework
+*** Concrete Collections
+*** Maps
+*** Copies and Views
+*** Algorithms
+*** Legacy Collections
+** Concurrency
+*** Running Threads
+*** Thread States
+*** Thread Properties
+*** Coordinating Tasks
+*** Synchronization
+*** Thread-Safe Collections
+*** Asynchronous Computations
+*** Processes
+** Annotations
+*** Using Annotations
+*** Defining Annotations
+*** Annotations in the JAVA API
+*** Processing Annotations at Runtime
+*** Source-Level Annotation Processing
+*** Bytecode Engineering
+** The Java Platform Module System
+*** The Module Concept
+*** Naming Modules
+*** The Modular "Hello, World!" Program
+*** Requiring Modules
+*** Exporting Packages
+*** Modular JARs
+*** Modules and Reflective Access
+*** Automatic Modules
+*** The Unnamed Module
+*** Command-Line Flags for Migration
+*** Transitive and Static Requirements
+*** Qualified Exporting and Opening
+*** Service Loading
+*** Tools for Working with Modules
