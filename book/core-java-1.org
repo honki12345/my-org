@@ -99,6 +99,74 @@ There are eight *primitive types* in Java.
 - Two are floating-point number types
 - one is the character type used for UTF-16 code units in the Unicode encoding scheme
 - one is for truth values
+
+**** Integer Types
+The integers types are for numbers without fractional parts
+Negative values are allowed
+Java does not have any ~unsigned~ versions of the ~int~, ~long~, ~short~, or ~byte~ types
+
+| Type  | Storage Requirements | Range(Inclusive)                |
+|-------+----------------------+---------------------------------|
+| byte  | 1 byte               | -128 to 127                     |
+| short | 2 bytes              | -32,768 to 32,767               |
+| int   | 4 bytes              | -2,147,483,648 to 2,147,483,647 |
+| long  | 8 bytes              | -                               |
+
+The ~byte~ and ~short~ types are mainly intended for specialized applications, such as low-level file handling or for large arrays *when storage space is at a premium*
+
+Under Java, the ranges of the integer types do not depend on the machine on which you will be running the Java code
+
+Long integer numbers have a suffix ~L~ or ~l~
+- e.g. ~4000000000L~
+Hexadecimal numbers have a prefix ~0x~ or ~0X~
+- e.g. ~0xCAFE~
+Octal numbers have a prefix ~0~
+- e.g. ~010~
+numbers in binary with a prefix ~0b~, ~0B~
+- e.g. ~0b1001~
+You can add underscores to the number literals
+- The Java compiler simply removes them
+- e.g. ~1_000_000~
+
+If you work with integer values that can never be negative and you really need an additional bit, you can, with some care, interpret signed integer values are unsigned
+- Due to the nature of binary arithmetic, addition, subtraction, and multiplication will work provided they don't overlflow
+- call ~Byte.toUnsignedInt(b)~ to get an ~int~ value between 0 and 255, then process the integer value and cast back to ~byte~
+
+The ~Integer~ and ~Long~ classes have methods for unsigned division and remainder
+
+**** Floating-Point Types
+The limited precision of ~float~ (6-7 significant digits) is simply not sufficient for many situations
+Use ~float~ values only when you work with a library that requires them, or when you need to store a very large number of them
+
+Java 20 adds a couple of methods(~Float.floatToFloat16~ and ~Float.float16toFloat~) for storing "half-precision" 16-bit floating-point numbers in ~short~ values. These are used for *implementating neural networks*
+
+Numbers of type ~float~ have a suffix ~F~, ~f~
+Floating-point numbers without an ~F~ suffix are always considered to be of type ~double~
+
+An ~E~ or ~e~ denotes a decimal exponent
+- e.g. ~1.729E3~
+
+You can specify floating-point literals in hexadecimal
+
+All floating-point computations follow the IEEE-754 specification
+
+There are three special floating-point values to denote *overflows and erros*
+The constants ~Double.POSITIVE_INFINITY~, ~Double.NEGETIVE_INFINITY~, and ~Double.NaN~ represent these special values, but *they are rarely used in practive*
+- Positive infinity
+  - e.g. the result of dividing a positive floating-point number by 0 is positive infinity
+- Negative infinity
+- NaN(not a number)
+  - e.g. Dividing 0.0 by 0 or the square root of a negative number yields NaN
+
+Floating-point numbers are *not* suitable *for financial calculations* in which roundoff erros cannot be tolerated
+- Such roundoff errors are caused by the fact that floating-point numbers are represented in the binary system
+  - There is no precise binary representation of the fraction 1/10, just as there is no accurate representation of the fraction 1/3 in the decimal system
+- if you need precise numerical computations without roundoff errors, use the ~BigDecimal~ class
+**** The ~char~ Type
+some Unicode characters can be decribed with *one* ~char~ value, and other Unicode characters require *two* ~char~ value
+
+Literal values of type ~char~ are enclosed in single quotes
+Values of type ~char~ can be expressed as hexadecimal values that run from `\u0000` to `\uFFFF`
 *** Variables and Constants
 *** Operators
 *** Strings
