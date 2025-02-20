@@ -417,8 +417,101 @@ if (str == null)
 - ~boolean isEmpty()~ 6
   ~boolean isBlank()~ 11
   return ~true~ if the string is empty or consists of whitespace
+- ~boolean startsWith(String prfix)~
+  ~boolean endsWith(String suffix)~
+  return ~true~ if the string starts with ~prefix~ or ends with ~suffix~
+- ~int indexOf(String str)~
+  ~int indexOf(String str, int fromIndex)~
+  ~int indexOf(String str, int fromIndex, int toIndex)~ 21
+  return the start of the first substring equal to the string ~str~, starting at index ~0~ or at ~fromIndex~, and ending at the end of the string or at ~toIndex~. Return ~-1~ if ~str~ does not occur in this string or the specified substring
+- ~int lastIndexOf(String str)~
+  ~int lastIndexOf(String str, int fromIndex)~
+  returns a new string that is obtained by replacing all substrings matching ~oldString~ in the string with the string ~newString~. You can supply ~String~ or ~StringBuilder~ arguments for the ~CharSequence~ parameters
+- ~String substring(int beginIndex)~
+  ~String substring(int beginIndex, int endIndex)~
+  return a new string consisting of all code units from ~beginIndex~ until the end of the string or until ~endIndex~ - 1
+- ~String toLowerCase()~
+  ~String toUpperCase()~
+  return a new string containing all characters in the original string, with uppercase characters converted to lowercase, or lowercase characters converted to uppercase
+- ~String strip()~ 11
+  ~String stripLeading()~ 11
+  ~String stripTrailing()~ 11
+  return a new string by eliminating leading and trailing, or just leading or trailing whitespace in the original string. Use these methods instead of the archaic ~trim~ method that eliminates characters <= U+0020
+- ~String join(CharSequence delimiter, CharSequence... elements)~ 8
+  returns a new string joining all elements with the given delimiter
+- ~String repeat(int count)~ 11
+  returns a string that repeats this string ~count~ times
+- ~String[] split(String regex)~ 1.4
+  finds all matches of the regular expression and split the string by removing them. Returns an array with the fragments, but not a trailing empty string
+**** Building Strings
+Every time you concatenate strings, a new ~String~ object is constructed.
+This is time consuming and wastes memory.
+Using the ~StringBuilder~ class avoids this problem
 
+The ~String~ class doesn't have a method to reverse the Unicode characters of a string, but ~StringBuilder~ does.
+To reverse a string, use this code snippet
+#+begin_src java
+String reversed = new StringBuilder(original).reverse().toString();
+#+end_src
+Reversing works correctly for characters that are encoded with two char values, but it does not take grapheme clusters into account.
+
+The legacy ~StringBuffer~ class is less efficient
+But it allows multiple threads to add or remove characters
+If all string editing happens in a single thread(which is usually the case), you should use ~StringBuilder~
+***** The ~StringBuilder~ API
+~java.lang.StringBuilder~ 5.0
+- ~StringBuilder()~
+  ~StringBuilder(CharSequence seq)~
+  constructs an empty string builder, or one with the given initial content
+- ~int length()~
+  returns the number of code units of the builder or buffer
+- ~StringBuilder append(String str)~
+  appends a string and returns the string builder
+- ~StringBuilder appendCodePoint(int cp)~
+  appends a code point, converting it into one or two code units, and returns ~this~
+- ~StringBuilder insert(int offset, String str)~
+  inserts a string at position ~offset~ and returns the string builder
+- ~StringBuilder delete(int startIndex, int endIndex)~
+  deletes code units with offsets ~startIndex~ to ~endIndex~ - 1 and returns the string builder
+- ~StringBuilder repeat(CharSequence cs, int count)~ 21
+  Appends ~count~ copies of ~cs~ and returns the string builder
+- ~StringBuilder reverse()~
+  Reverse the code points in this string builder and returns the builder
+- ~String toString()~
+  returns a string with the same data as the builder or buffer contents
+**** Text Blocks
+The text block feature, added in Java 15, makes it easy to provide string literals that span multiple lines
 *** Input and Output
+**** Reading Input
+The ~Scanner~ class is not suitable for reading a password from a console since the input is plainly visible to anyone
+Use ~readPassword~ method of the ~Console~ class to read a password while hiding the user input
+
+For security reasons, the password is returned in an array of characters rather than a string
+After you are done processing the password, you should immediately overwrite the array elements with a filler value
+
+***** Scanner
+~java.util.Scanner~ 5.0
+- ~Scanner(InputStream in)~
+  constructs a ~Scanner~ object from the given input stream
+- ~String nextLine()~
+  reads the next line of input
+- ~String next()~
+  reads the next word of input(delimited by whitespace)
+- ~int nextInt()~
+  ~double nextDouble()~
+  read and convert the next character sequence that represents an integer or floating-point number
+- ~boolean hasNext()~
+  tests whether there is another word in the input
+- ~boolean hasNextInt()~
+  ~boolean hasNextDouble()~
+  test whether the next character sequence represents an integer or floating-point number
+~java.lang.System~ 1.0
+- ~static Console console()~
+~java.io.Console~ 6
+- ~char[] readPassword(String prompt, Object... args)~
+  ~String readLine(String prompt, Object... args)~
+**** Formatting Output
+
 *** Control Flow
 *** Big Numbers
 *** Arrays
