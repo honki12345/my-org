@@ -754,9 +754,95 @@ Java has a powerful looping construct that allows you to loop through each eleme
 The collection expression must be an
 - array
 - an object of a class that implements the Iterable interface,
-
+**** Array Copying
+If you actually want to copy all values of one array into a new array, use the *copyOf* method in the *Arrays* class
+**** Command-Line Arguments
+Unlike in C++, *the name of the program is not stored* in the array of command-line arguments.
+**** Array Sorting
+**** Arrays API
+~java.util.Arrays~ 1.2
+- ~static String toString(T[] a)~ 5.0
+  returns a string with the elements of a, *enclosed in brackets* and *delimited by commas*. In this and the following methods, the component type T of the array can be ~int~, ~long~, ~short~, ~char~, ~byte~, ~boolean~, ~float~, or ~double~.
+- ~static T[] copyOf(T[] a, int end)~ 6
+  ~static T[] copyOfRange(T[] a, int start, int end)~ 6
+  return an array of the same type as a, of length either ~end~ or ~end – start~, filled with the values of ~a~. If end is larger than a.length, the result is padded with ~0~ or ~false~ values.
+- ~static void sort(T[] a)~
+- ~static void fill(T[] a, T v)~
+- ~static boolean equals(T[] a, T[] b)~
+  returns ~true~ if the arrays have the same length and if the elements at corresponding indexes match
+**** Multidimensional Arrays
+**** Ragged Arrays
 ** Objects and Classes 127
 *** Introduction to Object-Oriented Programming
+An object-oriented program is made of objects.
+Each object has a specific functionality, exposed to its users, and a hidden implementation
+
+[[../image/ProceduralvsOO.jpg]]
+**** structured programming vs object-oriented programming
+***** structured programming
+Traditional structured programming consists of designing a set of procedures(or *algorithms) to solve a problem
+Once the procedures are determined, the traditional ~next step~ was to find appropriate ways *to store the data*
+
+First, they dicided on the procedures for manipulating the data;
+then, they decided what structure to impose on the data to make the manipulations easier
+***** object-oriented programming
+OOP reverses the order:
+puts the data first, then looks at the algorithms to operate on the data
+**** Classes
+A *class* specifies how objects are made
+
+instance fields
+- The bits of data in an object
+
+methods
+- the procedures that operate on the data are called
+
+object
+- A specific object that is an instance of a class will have specific values of its instance fields
+
+state
+- The set of those values(its instance fields)
+- Whenever you invoke a mehtod on an object, its state may change
+
+inheritance
+- When you extend an existing class, the new class has all the properties and methods of the class that you extend. You then supply new methods and instance fields that apply to your new class only
+
+***** Encapsulation(information hiding)
+- Formally, encapsulation is simply combining data and behavior in one package and hiding the implementation details from the users of the object
+- The key to making encapsulation work is to have methods *never* directly access instance fields in a *class other than their own*.
+  - Programs should interact with object data *only* through the object's methods
+- Encapsulation is the way to give an object its "black box" behavior, which is the key to reuse and reliability
+  - This means a class may totally change how it stores its data, but as long as it continues *to use the same methods* to manipulate the data, no other object will know or care.
+- If an object's state changed *without* a method call on that object, someone broke encapsulation.
+**** Objects
+You should be able to identify three key characteristics of objects
+- The object's *behavior* - what can you do with this object, or what methods can you apply to it
+- The object's *state* - how does the object react when you invoke those methods?
+- The object's *identity* - how is the object distinguished from others that may have the same behavior and state?
+**** Identifying Classes
+In a traditional procedural program, you start the process at the *top*, with the *main function*.
+
+When designing an object-oriented system, there is no “top,” and newcomers to OOP often wonder where to begin.
+The answer is:
+- Identify your classes
+- then add methods to each class.
+**** Relationships between Classes
+The most common relationships between classes are
+***** Dependance ("uses-a")
+- A class depends on another class if its methods use or manipulate objects of that class
+- Try to minimize the number of classes that depend on each other
+  - The point is, if a class ~A~ is unaware of the existence of a class ~B~, it is also unconcerned about any changes to ~B~
+    (And this means that changes to ~B~ do not introduce bugs into ~A~)
+  - In software engineering terminology, you want to minimize the *coupling* between classes
+***** Aggregation ("has-a")
+- Containment means that objects of class ~A~ contain objects of class ~B~
+- Some methodologists view the concept of aggregation with disdain and prefer to use a more general “association” relationship.
+***** Inheritance ("is-a")
+***** UML(Unified Modeling Language)
+Many programmers use the UML (Unified Modeling Language) notation to draw class diagrams that describe the *relationships between classes*.
+
+You draw *classes as rectangles*, and *relationships as arrows* with various adornments
+
 *** Using Predefined Classes
 *** Defining Your Own Classes
 *** Static Fields and Methods
