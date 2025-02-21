@@ -511,10 +511,250 @@ After you are done processing the password, you should immediately overwrite the
 - ~char[] readPassword(String prompt, Object... args)~
   ~String readLine(String prompt, Object... args)~
 **** Formatting Output
+Each of the *format specifiers* that start with a ~%~ character is replaced with the corresponding argument
+The *conversion character* that ends a format specifier indicates the type of the value to be formatted
 
+Table 3.6: Conversions for ~printf~
+
+You can use the ~s~ conversion to format arbitrary objects
+If an arbitrary object implements the ~Formattable~ interface, the object's ~formatTo~ method is invoked
+
+You can specify *flags* that control the appearance of the formatted output
+You can use multiple flags
+
+Table 3.7: Flags for ~printf~
+
+Figure 3.6: Format specifier syntax
+[[../image/specifier_syntax.jpg]]
+
+Formatting is *locale-specific*
+If you produce a file that is later consumed by a computer program, you may need to choose a fixed locale for the output
+**** File Input and Output
+To read from a file, construct a ~Scanner~ object like this
+If the file name contains backslashes, remember to escape each of them with an additional backslash
+
+File store bytes, not Unicode characters
+As of Java 18, UTF-8, this is the default encoding for all operations that read and write text
+In older versions, the "default charset" of the computer running the Java program was used
+
+To write to a file, construct a ~PrintWriter~ object
+Prior to Java 18, you had to set the character encoding explicity to UTF-8
+
+When you specify a relative file name, the file is located relative to the directory in which the jvm was started
+If you run into grief with locating files, consider using absolute path names
+***** ~Scanner~, ~PrintWriter~, ~Path~ API
+~java.util.Scanner~ 5.0
+- ~Scanner(Path p)~ 7
+  ~Scanner(Path p, Charset charset)~ 10
+  constructs a ~Scanner~ that reads data from the given path, using the default or given character encoding
+- ~Scanner(String data)~
+  constructs a ~Scanner~ that reads data from the given string
+
+~java.io.PrintWriter~ 1.1
+- ~PrintWriter(String fileName)~
+  ~PrintWriter(String fileName, Charset charset)~ 10
+  constructs a ~PrintWriter~ that writes data to the file with the given file name, using the default or given character encoding
+
+~java.nio.file.Path~ 7
+- ~static Path of(String pathname)~ 11
+  constructs a ~Path~ from the given path name
 *** Control Flow
+Java supports both conditional statements and loops to determine control flow
+**** Block Scope
+A block,(sometimes called a *compound statement*) consists of a number of Java statements, surrounded by a pair of braces
+Blocks define the scope of your variables
+A Block can be *nested* inside another block
+**** Conditional Statements
+**** Loops
+If you want to make sure a block is executed at least once, you need to move the test to the bottom, using the ~do/while~ loop
+**** Determinate Loops
+The *for* loop is a general construct to support iteration controlled by a *counter* or similar variable that is *updated after every iteration*
+
+The first slot usually holds the counter initialization
+The second slot gives the condition that will be tested *before* each new pass through the loop
+The third slot specifies how to update the counter
+
+When you declare a variable in the first slot of the *for* statement, the scope of that variable extends until the end of the body of the ~for~ loop
+If you wish to use the final value of a loop counter *outside the for loop*, be sure to declare it outside the loop header.
+
+The first slot of a for loop can declare multiple variables, provided they are of the same type. And the third slot can contain multiple comma-separated expressions:
+#+begin_src java
+for (int i = 1, j = 10; i <= 10; i++, j--) { ... }
+#+end_src
+**** Multiple Selections with ~switch~
+Unlike a ~switch~ expression, a ~switch~ statement has no value. Each case carries out an action
+
+In the fallthrough, each case ends with a *colon*
+In the no-fallthrough, each case ends with *arrows*
+You can't mix colons and arrows in a single *switch* statement
+
+[*switch* expression]
+Each branch must yield a value
+- ~->~ value
+- ~yield~ value (like break)
+It is legal *to throw an exception* in a branch of *a switch expression*
+The point of a *switch* expression is to produce a value(or to fail with an exception). You are not allowed to "jump out"
+- You cannot use `return`, `break`, `continue` *statement* in a *switch expression*
+
+Which one should you choose?
+- Avoid the fallthrough forms
+  - It is very *uncommon* to need fallthrough
+- Prefer *switch* expressions over statements
+
+***** Exprssion; No Fallthrough
+#+begin_src java
+int numLetters = switch (seasonName)
+    {
+        case "Spring" ->
+                {
+                    ...
+                    yield 6;
+                }
+        case "Summer", "Winter" -> 6;
+        default -> -1;
+    }
+#+end_src
+***** Expression; Fallthrough
+#+begin_src java
+int numLetters = switch (seasonName)
+    {
+        case "Spring":
+                ...
+        case "Summer", "Winter":
+                yield 6;
+        default:
+                yield -1;
+    }
+#+end_src
+***** Statement; No Fallthrough
+#+begin_src java
+switch (seasonName)
+    {
+        case "Spring" ->
+            {
+                ...;
+                numLetters = 6;
+            }
+        case "Summer", "Winter" -> numLetters = 6;
+        default -> numLetters = -1;
+    }
+#+end_src
+***** Statement; Fallthrough
+#+begin_src java
+switch (seasonName)
+    {
+        case "Spring":
+            ...;
+        case "Summer", "Winter":
+            numLetters = 6;
+            break;
+        default:
+            numLetters = -1;
+    }
+#+end_src
+**** Statements That Break Control Flow
+Although the designers of *Java kept goto as a reserved word*, they decided not to include it in the language.
+
+
+***** *unlabeled break* statement
+The *break* statement can also be used to break out of a loop.
+***** *labeled break* statement
+The labeled break statement lets you break out of multiple nested loops.
+
+If there is a bad input, the labeled break moves *past the end of the labeled block*.
+As with any use of the break statement, you then need to *test whether the loop exited normally or as a result of a break.*
+
+You can apply a label to *any statement* like ~if~ statement, a block statement...
+
+Note that you can only jump *out of* a block, never *into* a block
+***** continue statement
+The *continue* statement transfers control to the header of the innermost enclosing loop
+If the ~continue~ statement is used in a ~for~ loop, it jumps to the "update" part of the ~for~ loop
+
+There is also a labeled form of the *continue* statement that jumps to the *header* of the loop with the matching label
 *** Big Numbers
+If the precision of the basic integer and floating-point type is not sufficient, you can turn to the classes in the ~java.math~ package: ~BigInteger~ and ~BigDecimal~
+- The BigInteger class implements arbitrary-precision integer arithmetic
+- BigDecimal does the same for floating-point numbers.
+
+Use the static ~valueOf~ method to turn an ordinary number into a big number
+For longer numbers, use a constructor with a *string* argument
+
+With the ~BigDecimal~ class, you should always use the constructor with a *string* argument
+- There is a constructor ~BigDecimal(double)~ that is inherently prone to roundoff
+  e.g. ~new BigDecimal(0.1)~
+
+In Java 19, the BigInteger class provides a parallelMultiply method that yields the same result as multiply but can potentially compute the result faster by using multiple processor cores
+
+~java.math.BigInteger~ 1.1
+- ~BigInteger add(BigInteger other)~
+  ~BigInteger subtract(BigInteger other)~
+  ~BigInteger multiply(BigInteger other)~
+  ~BigInteger divide(BigInteger other)~
+  ~BigInteger mod(BigInteger other)~
+  ~BigInteger pow(BigInteger other)~
+  return the sum, difference, product, quotient, remainder, and power of this big integer and ~other~
+- ~BigInteger sqrt()~ 9
+- ~int compareTo(BigInteger other)~
+- ~static BigInteger valueOf(long x)~
+  returns a big integer whose value equals ~x~
+
+~java.math.BigDecimal~ 1.1
+- ~BigDecimal(String digits)~
+- ~BigDecimal add(BigDecimal other)~
+  ~BigDecimal subtract(BigDecimal other)~
+  ~BigDecimal multiply(BigDecimal other)~
+  ~BigDecimal divide(BigDecimal other)~ 5.0
+  ~BigDecimal divide(BigDecimal other, RoundingMode mode)~ 5.0
+  return the sum, difference, product, or quotient of this big decimal and ~other~.
+  The first ~divide~ method throws an exception if the quotient does not have a finite decimal expansion
+  To obtain a rounded result, use the second method
+- ~int compareTo(BigInteger other)~
 *** Arrays
+Arrays hold sequences of values of the same type.
+**** Declaring Arrays
+#+begin_src java
+int[] a;        // this statement only declares the variable *a*.
+int[] a = new int[100]; // Use the *new* operator to create the array
+#+end_src
+
+The array length need not be a constant
+
+Once you create an array, you cannot change its length
+
+***** create and supply initial values
+Java has a shortcut for *creating* an array object and supplying *initial values*:
+- you do not use ~new~ with this syntax
+- you don't specify the length
+- A comma after the last value is allowed
+#+begin_src java
+int[] smallPrimes = { 2, 3, 5, 7, 11, 13 };
+#+end_src
+***** arrays of length 0
+It is legal to have arrays of length 0
+- Such an array can be useful if you write a method that computes an array result and the result happens to be empty
+#+begin_src java
+new type[0];
+new type[0] {};
+#+end_src
+***** anonymous array
+Declare an *anonymous array*
+#+begin_src java
+new int[] { 17, 19, 23, 29, 31, 37 }
+#+end_src
+**** Accessing Array Elements
+When you create an array of *numbers*, all elements are initialized with *zero*
+Arrays of *boolean* are initialized with *false*
+Arrays of *objects* are initialized with the special value *null*, which indicates that they do not (yet) hold any objects.
+**** print all values of array
+There is an even easier way to print all values of an array, using the toString method of the Arrays class.
+**** The "for each" loop
+Java has a powerful looping construct that allows you to loop through each element in an array (or any other collection of elements)
+
+The collection expression must be an
+- array
+- an object of a class that implements the Iterable interface,
+
 ** Objects and Classes 127
 *** Introduction to Object-Oriented Programming
 *** Using Predefined Classes
