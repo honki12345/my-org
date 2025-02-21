@@ -844,6 +844,35 @@ Many programmers use the UML (Unified Modeling Language) notation to draw class 
 You draw *classes as rectangles*, and *relationships as arrows* with various adornments
 
 *** Using Predefined Classes
+**** Objects and Object Variables
+To work with objects, you first construct them and specify their initial state
+Then you apply methods to the objects
+
+It is important to realize that an object variable doesn’t actually contain an object.
+It only *refers* to an object
+***** built-in type vs class
+With classes, the design task is *offloaded* to a library designer.
+If the class is not perfect, other programmers can easily write their own classes to enhance or replace the system classes. 
+***** constructor
+In Java, you use *constructors* to construct new instances
+A constructor is a special method whose purpose is to *construct* and *initialize* objects
+
+Constructors always have the same name as the class name
+**** The *LocalDate* class of the Java Library
+An instance of the ~Date~ class has a state—namely, a *particular* point in time.
+The time in ~Date~ is represented by the number of milliseconds(positive or negative) from a fixed point, the so-called *epoch*, which is 00:00:00 UTC, January 1,1970
+
+the *Date* class is not very useful for manipulating the kind of calendar information that humans use for dates,
+
+The library designers decided to separate the concerns of *keeping time* and *attaching names* to points in time.
+- the ~Data~ class, which represents a point in time
+- the ~LocalDate~ class, which express days in the familiar calendar notation
+- Nowadays there is a much more robust set of classes for manipulating various aspects of date and time
+
+***** UTC
+UTC is the Coordinated Universal Time, the scientific time standard which is, for practical purpose, the same as the more familiar GMT, or Greenwich Mean Time
+**** Mutator and Accessor Methods
+*Accessor methods* that only access objects without modifying them
 *** Defining Your Own Classes
 *** Static Fields and Methods
 *** Method Parameters
