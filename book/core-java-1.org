@@ -873,9 +873,163 @@ The library designers decided to separate the concerns of *keeping time* and *at
 UTC is the Coordinated Universal Time, the scientific time standard which is, for practical purpose, the same as the more familiar GMT, or Greenwich Mean Time
 **** Mutator and Accessor Methods
 *Accessor methods* that only access objects without modifying them
+**** LocalDate API
+~java.time.LocalDate~ 8
+- ~static LocalDate now()~
+  constructs an object that represents the current date
+- ~static LocalDate of(int year, int month, int day)~
+  constructs an object that represents the given date
+- ~int getYear()~
+  ~int getMonthValue()~
+  ~int getDayOfMonth()~
+  get the year, month, and day of this date
+- ~DayOfWeek getDayOfWeek()~
+  gets the weekday of this date as an instance of the ~DayOfWeek~ class.
+  Call *getValue* on the DayOfWeek instance to get a weekday between ~1~ (Monday) and ~7~ (Sunday).
+- ~LocalDate plusDays(int n)~
+  ~LocalDate minusDays(int n)~
+
 *** Defining Your Own Classes
+**** An ~Employee~ Class
+**** Use of Multiple Source Files
+Many programmers prefer to put each class into its own source file.
+
+**** Dissecting the ~Employee~ Class
+when the Java compiler sees the Employee class being used inside EmployeeTest.java,
+- it will look for a file named Employee.class.
+  - If it does not find that file, it automatically searches for Employee.java and compiles it.
+- Moreover, if the *timestamp of the version of Employee.java* that it finds is newer than that of the existing Employee.class file, the Java compiler will automatically recompile the file.
+***** The ~private~ keyword
+The private keyword makes sure that the only methods that *can access* these instance fields are *the methods of* the Employee class *itself*.
+No outside method can read or write to these fields.
+***** The ~public~ keyword
+ The keyword public means that *any* method in *any* class can call the method
+**** First Steps with Constructors
+This constructor runs when you construct objects - giving the instance fields the *initial state* you want them to have
+**** Declaring Local Variables with ~var~
+~var~ keyword provides their type can be *inferred* from the *inital value*
+**** Working with ~null~ References
+An object variable holds
+- a reference to an object, or
+- the special value ~null~ to indicate the absence of an object
+
+If you apply a method to a ~null~ value, a ~NullPointerException~ occurs
+
+When you define a class, it is a good idea to be clear about which fields can be ~null~
+
+Two solutions for handling ~null~
+- The "permissive" approache is to turn a ~null~ argument into an appropriate *non-null* value
+  - The ~Objects~ class has a convenience method: ~Objects.requireNonNullElse()~
+- The "tough love" approach is to *reject* a ~null~ argument
+  - The ~Objects~ class has a convenience method: ~Objects.requireNonNull()~
+**** Implicit and Explicit Parameters
+implicit argument
+- The object of type that appears *before* the method name
+- Every method has an *implicit parameter* whose name is the keyword ~this~, which is initialized with the implicit argument
+
+explicit argument
+- The arguments inside the parentheses after the method name
+- (Some people call the implicit argument the *target* of *receiver* of the method call)
+**** Benefits of Encapsulation
+field accessors
+- The methods return the values of instance fields
+
+get and set the value
+- A private instance field
+- A public field accessor method
+- A public field mutator method.
+
+Be careful not to write accessor methods that *return* references to *mutable objects*.
+
+Figure 4.5: Returning a reference to a mutable instance field
+- *cloning* the mutable object before returning it.
+- use immutable objects when possible
+[[../image/mutableobject.jpg]]
+**** Class-Based Access Privileges
+A method can access the private data of *all objects of its class*
+
+#+begin_src java
+class Employee
+{
+   . . .
+   public boolean equals(Employee other)
+   {
+      return name.equals(other.name);
+   }
+}
+#+end_src
+**** Private Methods
+private methods are useful in certain circumstances
+- You may wish to break up the code for a computation into separate *helper methods*.
+  Typically, these helper methods should not be part of the public interface
+
+The point is that as long as the method is private, the designers of the class can be assured that it is *never used* elsewhere, so they can simply *drop* it.
+
+If a method is public, you *cannot* simply drop it because other code might rely on it.
+**** Final Instance Fields
+Such a field *must be initialized* when the object is constructed.
+Afterwards, the field may not be modified again.
+
+The final modifier is particularly useful for fields whose type is *primitive* or an *immutable class*.
+- A class is immutable if *none of its methods* ever mutate its objects. For example, the String class is immutable.
+
+For *mutable* classes, the final modifier can be *confusing*.
+#+begin_src java
+private final StringBuilder evaluations;
+evaluations = new StringBuilder();
+
+public void giveGoldStar()
+{
+   evaluations.append(LocalDate.now() + ": Gold star!\n");
+}
+#+end_src
+
+A final field can be *null*:
 *** Static Fields and Methods
+**** Static Fields
+A *field* as static, then the field is *not* present in the objects of the class.
+You can think of static fields as belonging to the *class*, not to the individual objects.
+Even if there are *no Employee objects*, the static field nextId is present.
+It belongs to the *class*, not to any individual object.
+
+There is only a single copy of each static field.
+
+In some object-oriented programming languages, static fields are called *class fields*
+**** Static Constants
+Static variables are quite rare. However, static *constants* are more common.
+**** Static Methods
+Static methods are methods that do *not* operate on objects
+
+You can think of static methods as methods that don’t have a *this* parameter.
+
+A static method of class *cannot* access the instance field
+
+I recommend that you use class names, not objects, to invoke static methods.
+
+Use static methods in two situations:
+- When a method *doesn’t* need to access the *object state* because all needed parameters are supplied as explicit parameters (e.g: Math.pow)
+- When a method *only* needs to access static fields of the class
+**** Factory Methods
+Here is another common use for static methods
+- use static factory methods that *construct* objects.
+
+constructor vs factory methods
+- When you use a constructor, You can’t give names to constructors.
+- When you use a constructor, you can’t vary the type of the constructed object
+- You may want to share instances
+**** The ~main~ Method
+**** Objects API
+~java.util.Objects~ 7
+- ~static <T> void requireNonNull(T obj)~
+  ~static <T> void requireNonNull(T obj, String message)~
+  ~static <T> void requireNonNull(T obj, Supplier<String> messageSupplier)~ 8
+  If ~obj~ is ~null~, these methods throw a ~NullPointerException~ with no message or given message
+- ~static <T> T requireNonNullElse(T obj, T defaultObj)~ 9
+  ~static <T> T requireNonNullElseGet(T obj, Supplier<T> defaultSupplier)~ 9
+  return ~obj~ if it is not null, or the ~default object~ if obj is null.
+
 *** Method Parameters
+
 *** Object Construction
 *** Records
 *** Packages
