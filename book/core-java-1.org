@@ -1029,8 +1029,82 @@ constructor vs factory methods
   return ~obj~ if it is not null, or the ~default object~ if obj is null.
 
 *** Method Parameters
+This demonstrates that the Java programming language does *not* use call by reference for objects.
+Instead, *object references are passed by value*
+
+A summary of what you *can and cannot* do with method parameters in Java:
+- A method cannot modify a parameter of a *primitive* type
+- A method can change the *state* of an object parameter.
+- A method cannot make an object parameter refer to a new object.
 
 *** Object Construction
+**** Explicit Field Initialization
+#+begin_src java
+class Employee
+{
+   private String name = "";
+   . . .
+}
+#+end_src
+This assignment is carried out before the constructor executes.
+This syntax is particularly useful if all constructors of a class need to set a particular instance field to the *same value*
+
+The initialization value doesn’t have to be a constant value.
+**** Calling Another Constructor
+If the first statement of a constructor has the form ~this(. . .)~, then the constructor calls another constructor of the same class.
+**** Initialization Blocks
+Class declarations can contain arbitrary blocks of code.
+These blocks are executed whenever an object of that class is constructed
+
+#+begin_src java
+class Employee
+{
+   private static int nextId;
+
+   private int id;
+   private String name;
+   private double salary;
+
+   // object initialization block
+   {
+      id = nextId;
+      nextId++;
+   }
+
+   public Employee(String n, double s)
+   {
+      name = n;
+      salary = s;
+   }
+
+   public Employee()
+   {
+      name = "";
+      salary = 0;
+   }
+   . . .
+}
+#+end_src
+The initialization block runs first, and *then* the body of the constructor is executed.
+
+This mechanism is *never* necessary and is not common.
+It is usually more straightforward to place the initialization code *inside a constructor*.
+
+***** Circular definitions
+To avoid circular definitions, you should always place initialization blocks after the field definitions.
+***** when a constructor is called
+- All instance fields are initialized to their default values (0, false, or null).
+- All field initializers and initialization blocks are executed, in the order in which they occur in the class declaration.
+- The body of the constructor is executed.
+***** static field
+If the static fields of your class require *complex* initialization code, use a static *initialization block*.
+
+*Like instance fields*, static fields are 0, false, or null unless you explicitly set them to another value.
+
+All static field initializers and static initialization blocks are executed *in the order* in which they occur in the class declaration.
+**** Random API
+~java.util.random.RandomGenerator~ 17
+- ~int next
 *** Records
 *** Packages
 *** JAR Files
