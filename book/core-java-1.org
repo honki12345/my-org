@@ -1104,9 +1104,100 @@ If the static fields of your class require *complex* initialization code, use a 
 All static field initializers and static initialization blocks are executed *in the order* in which they occur in the class declaration.
 **** Random API
 ~java.util.random.RandomGenerator~ 17
-- ~int next
+- ~int nextInt(int n)~
+  returns a random integer between 0 and ~n~ - 1
+- ~static RandomGenerator of(String name)~
+  yields a random generator for the given algorithm name.
+- ~static RandomGenerator getDefault()~
+  yields a strong random generator with 64 or more state bits.
+~java.util.Random~ 1.0
+- ~static from(RandomGenerator generator)~ 19
+  returns a Random instance whose methods delegate to the given RandomGenerator.
+**** Object Destruction and the ~finalize~ Method
+Do *not* use the finalize method for cleanup
 *** Records
+**** The Record Concept
+A record is a special form of a class whose state is *immutable* and *readable by the public*
+
+The class(Record) has a constructor and accessor methods ([[*Mutator and Accessor Methods]]) and ~toString~, ~equals~ and ~hashCode~
+can
+- You can add your *own* methods to a record
+- A record, like any class, can have *static fields and methods*
+cannot
+- You cannot add *instance fields* to a record
+- If you intend record instances to be immutable, don't use *mutable types* for fields.
+
+***** declaration
+To declare a record, provide the name and the instance variables that hold the object state.
+
+#+begin_src java
+record Point(double x, double y) { }
+#+end_src
+
+In the Java language specification, the instance *fields* of a record are called *its components*.
+***** Class vs Record
+Use a *record* instead of a class for immutable data that is completely represented by a set of variables.
+Use a *class* if the data is mutable, or if the representation may evolve over time.
+**** Constructors: Canonical, Compact, and Custom
+canonical constructor
+- The automatically defined constructor that sets all instance fields
+
+compact form
+- To validate or normalize the parameters for the canonical constructor
+- The body of the compact form is the “prelude” to the canonical constructor. It merely modifies *the parameter variables* from and to *before they are assigned* to the instance field
+
+  #+begin_src java
+record Range(int from, int to)
+{
+   public Range // Compact form, validating parameters
+   {
+      if (from > to) throw new IllegalArgumentException();
+   }
+}
+  #+end_src
+
+You can define additional *custom constructors*
+The first statement of such a constructor must call another constructor, so that ultimately *the canonical constructor is invoked*
+
+If the canonical constructor needs to do additional work, you can provide your own implementation.
+But this is very *uncommon*
 *** Packages
+Java allows you to *group classes in a collection* called a package
+**** Package Names
+The main reason for using packages is to guarantee *the uniqueness of class names*
+
+In fact, to absolutely guarantee a unique package name, use an *Internet domain name* (which is known to be unique) written in reverse.
+You then use subpackages for different projects.
+
+there is absolutely no relationship between nested packages
+- Each is its own *independent* collection of classes.
+  e.g. ~java.util~ and ~java.util.jar~ have nothing to do with each other.
+**** Class Importation
+A class can use
+all classes *from its own package*
+and *all **public** classes from other packages.*
+
+The point of the import statement is to give you *a shorthand to refer* to the classes in the package
+You can import a specific class or the whole package.
+- e.g. *
+- you can only use the * notation to import a *single package*.
+
+Locating classes in packages is an activity of the *compiler*.
+The bytecodes in class files always use full package names to refer to other classes.
+***** name conflict
+The only time that you need to pay attention to packages is when you have a *name conflict*.
+
+You can solve this problem by adding a specific import statement:
+**** Static Imports
+A form of the ~import~ statement permits the importing of static methods and fields, not just classes.
+**** Addition of a Class into a Package
+To place classes inside a package, *put the name of the package at the top of your source file*, before the code that defines the classes in the package
+
+If you don’t put a package statement in the source file, then the classes in that source file belong to the *unnamed package*.
+The unnamed package has no package name
+
+Place source files into a subdirectory that matches the full package name
+- The compiler places the class files into the same directory structure.
 *** JAR Files
 *** Documentation Comments
 *** Class Design Hints
