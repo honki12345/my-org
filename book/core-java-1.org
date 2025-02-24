@@ -1197,8 +1197,33 @@ If you don’t put a package statement in the source file, then the classes in t
 The unnamed package has no package name
 
 Place source files into a subdirectory that matches the full package name
-- The compiler places the class files into the same directory structure.
+- The *compiler places the class files* into the same directory structure.
+- The *virtual machine* won’t find the classes if the packages don't match the directories.
+
+In this situation, you still must compile and run classes from the *base* directory
+**** Pacakge Access
+~public~
+- can be used by any class
+~private~
+- can be used only by the class that defines them
+~default~
+- can be used by all methods in the same *pacakge*
+- e.g. the unamed package
+
+You should use *modules* to encapsulate packages
+**** The Class Path
+The class path is the collection of all locations that can contain class files.
+**** Setting the Class Path
+It is best to specify the class path with the option -classpath
+(or -cp or the more modern variant, --class-path)
+- The entire command must be typed onto a single line. It is a good idea to place such a long command line into a shell script or a batch file.
+
+The class path lists all directories and archive files that are *starting points* for locating classes.
 *** JAR Files
+When you package your application,
+you want to give your users *a single file, not a directory structure* filled with class files. Java Archive (JAR) files were designed for this purpose
+
+A JAR file can contain both class files and other file types such as image and sound files. Moreover, JAR files are compressed, using the familiar ZIP compression format.
 *** Documentation Comments
 *** Class Design Hints
 ** Inheritance 217
