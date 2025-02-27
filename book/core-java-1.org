@@ -1037,6 +1037,14 @@ A summary of what you *can and cannot* do with method parameters in Java:
 - A method can change the *state* of an object parameter.
 - A method cannot make an object parameter refer to a new object.
 
+How parameters can be passed to method?
+
+call by value
+- The method gets just the value that the caller provides
+call by reference
+- The method gets the *location* of the variable that the caller provides
+- A method can *modify* the value stored in a variable passed by reference
+
 *** Object Construction
 **** Explicit Field Initialization
 #+begin_src java
