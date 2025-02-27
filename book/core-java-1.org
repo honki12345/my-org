@@ -1224,8 +1224,68 @@ When you package your application,
 you want to give your users *a single file, not a directory structure* filled with class files. Java Archive (JAR) files were designed for this purpose
 
 A JAR file can contain both class files and other file types such as image and sound files. Moreover, JAR files are compressed, using the familiar ZIP compression format.
+**** The Manifest
+Each JAR file contains a *manifest* file that describes special features of the archive.
+
+The manifest file is called ~MANIFEST.MF~ and is located in a special *META-INF subdirectory* of the JAR file
+**** Executable JAR Files
+You can use the e option of the jar command to specify the *entry* point of your program
+— the *class* that you would normally specify when invoking the java program launcher:
+~jar cvfe MyProgram.jar com.mycompany.mypkg.MainAppClass files to add~
+- Alternatively, you can specify the main class of your program in the manifest, including a statement of the form
+  ~Main-Class: com.mycompany.mypkg.MainAppClass~
+
+The public API of all classes should be the *same* for both releases.
+- The sole purpose of multi-release JARs is to enable a particular version of your program or library to work with multiple JDK releases
+**** Multi-Release JAR Files
 *** Documentation Comments
+Javadoc that generates HTML documentation from your source files.
+
+If you add comments that start with the special delimiter ~/**~ to your source code, you too can easily produce professional-looking documentation
+**** Comment Insertion
+The javadoc utility extracts information for the following items
+- Modules
+- Packages
+- Public classes and interfaces
+- Public and protected fields
+- Public and protected constructors and methods
+
+The *first sentence* of the *free-form* text should be a *summary statement*.
+- The javadoc utility automatically generates summary pages that extract these sentences.
+***** tag
+Each /** . . . */ documentation comment contains *free-form text* followed by tags.
+- A tag starts with an @, such as @since or @param.
+**** Class Comments
+The class comment must be placed *after* any ~import~ statements, directly before the ~class~ definition.
+**** Method Comments
+Each method comment must immediately precede the method that it describes.
+
+In addition to the general-purpose tags, you can use the following tags:
+**** Field Comments
+You only need to document public fields—generally that means static constants.
+**** Package Comments
+To generate package comments, you need to add a *separate file* in each package directory
+- Supply a Java file named ~package-info.java~
+- Supply an HTML file named ~package.html~
+**** HTML Markup
+To type monospaced code, use {@code . . . } instead of <code>. . .</code>
+**** Links
+You can use hyperlinks to other relevant parts of the javadoc documentation, or to external documents,
+- with the ~@see~ and ~@link~ tags.
+**** General Comments
+- ~@since text~
+- ~@author name~
+- ~@version text~
+**** Code Snippets
+**** Comment Extraction
 *** Class Design Hints
+1. *Always keep data private.*
+2. *Always initialize data.*
+3. *Don’t use too many basic types in a class.*
+4. *Not all fields need individual field accessors and mutators.*
+5. *Break up classes that have too many responsibilities.*
+6. *Make the names of your classes and methods reflect their responsibilities.*
+7. *Prefer immutable classes.*
 ** Inheritance 217
 *** Classes, Superclasses, and Subclasses
 *** Object: The Cosmic Superclass
