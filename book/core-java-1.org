@@ -1273,6 +1273,8 @@ In addition to the general-purpose tags, you can use the following tags:
 You only need to document public fields—generally that means static constants.
 **** Package Comments
 To generate package comments, you need to add a *separate file* in each package directory
+
+You have two choices
 - Supply a Java file named ~package-info.java~
 - Supply an HTML file named ~package.html~
 **** HTML Markup
@@ -1285,6 +1287,14 @@ You can use hyperlinks to other relevant parts of the javadoc documentation, or 
 - ~@author name~
 - ~@version text~
 **** Code Snippets
+This feature allows you to import code from external files
+***** import an entire file
+#+begin_src java
+  {@snippet file=EmployeeTest.java}
+  {@snippet class=com.horstmann.corejava.EmployeeTest.java}
+#+end_src
+Files should be placed in the ~snippet-files~ subdirectory of the current package
+***** copy a region from a file
 **** Comment Extraction
 *** Class Design Hints
 1. *Always keep data private.*
