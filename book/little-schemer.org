@@ -1,0 +1,492 @@
+* The Little Schemer
+** The Ten Commandments
+*** The First Commandment
+When recurring on a list of atoms, *lat* , ask two questions about it:
+- ~(null? lat) and else~
+
+When recurring on a number, *n* , ask two questions about it:
+- ~(zero? n) and else~
+
+When recurring on a list of S-expressions, *l* , ask three question about it:
+- ~(null? l), (atom? (car l)), and else~
+*** The Second Commandment
+Use *cons* to build lists
+*** The Third Commandment
+When building a list,
+describe the first typical element,
+and then *cons* it onto the natural recursion
+*** The Fourth Commandment
+Always change at least one argument while recurring
+
+When recurring on a list of atoms, *lat*
+use ~(cdr lat)~
+
+When recurring on a number, *n*,
+use ~(sub1 n)~
+
+When recurring on a list of S-expressions, *l*,
+use ~(car l)~ and ~(cdr l~ if neither ~(null? l)~ nor ~(atom? (car l))~ are true
+
+It must be changed to be closer to termination
+The changing argument must be tested in the termination condition:
+- when using ~cdr~, test termination with ~null?~
+- when using ~sub1~, test termination with ~zero?~
+*** The Fifth Commandment
+When building a value with '+', always use 0 for the value of the terminating line,
+for adding 0 does not change the value of an addition
+
+When building a value with 'x', always use 1 for the value of the terminating line,
+for multiplying by 1 does not change the value of a multiplication
+
+When building a value with 'cons', always consider () for the value of the terminating line
+*** The Sixth Commandment
+Simplify only after the function is correct
+*** The Seventh Commandment
+Recur on the subparts that are of the same nature:
+- On the sublists of a list
+- On the subexpressions of an arithmetic expression
+*** The Eighth Commandment
+Use help functions to abstract from representations
+*** The Ninth Commandment
+Abstract common patterns with a new function
+*** The Tenth Commandment
+** The Five Rules
+*** The Law of Car
+The primitive 'car' is defined only for *non-empty* lists
+*** The Law of Cdr
+The primitive 'cdr' is defined only for *non-empty* lists
+The 'cdr' of any non-empty list is always another *list*
+*** The Law of Cons
+The primitive 'cons' takes two arguments
+The second argument to 'cons' must be a list
+The result is a list
+*** The Law of Null?
+The primitive 'null?' is defined only for lists
+*** The Law of Eq?
+The primitive 'eq?' takes two arguments
+Each must be a *non-numeric atom*
+** 1. toys
+atom is a string of characters, digits
+all atoms are S-expressions
+
+list is a collection of S-expressions enclosed by parentheses
+all lists are S-expressions
+null list is a special list ( S-expressions ) which contains zero S-expressions enclosed by parentheses
+
+(car l) is the first S-expression of 'l'
+*car* takes any non-empty list
+
+(cdr l) is the list 'l' without ~(car l)~
+*cdr* takes any non-empty list
+
+*cons* adds a S-expression to the front of a list
+*cons* takes two arguments:
+- the first one is any S-expression
+- the second one is any list
+
+~(quote ())~ is a notation for the null list
+*** The Law of Null?
+The primitive null ? is defined only for lists
+*** The Law of Eq?
+The primitive *eq?* takes two arguments
+Each must be a non-numeric atom
+** 2. Do it, Do it again, and again, and again...
+*lat* is a list of atoms
+'()' is *lat* because it does not contain a list
+
+*(cond ...)* asks questions
+*(lambda ...)* creates a function
+*(define ...)* gives it a name
+
+the question *else* is always true
+
+#+begin_src scheme
+  (define lat?
+    (lambda (l)
+      (cond
+       ((null? l) #t)
+       ((atom? (car l)) (lat? (cdr l)))
+       (else #f))))
+#+end_src
+
+#+begin_src scheme
+  (define member?
+    (lambda (a lat)
+      (cond
+       ((null? lat) #f)
+       (else (or (eq? (car lat) a)
+                 (member? a (cdr lat)))))))
+#+end_src
+** 3. Cons the Magnificent
+What is (rember a lat)
+where a is min
+and
+ lat is (lamb chops and int jelly)
+
+(lamb chops and jelly)
+"Rember" stands for-remove a member
+---
+(rember a lat)
+where a is mint
+and
+ lat is(lamb chops and
+ mint flavored mint jelly)
+
+ (lamb chops and flavored mint jelly)
+ ---
+ (rember a lat)
+ where a is toast
+ and
+ lat is (bacon lettuce and tomato)
+
+ (bacon lettuce and tomato)
+ ---
+ (rember a lat)
+ where a is cup
+ and
+ lat is (coffee cup tea cup and hick cup)
+
+ (coffee tea cup and hick cup)
+ ---
+ What does (rember a lat) do ?
+
+ It takes an atom and a lat as its arguments,
+ and makes a new lat with the first occurrence of the atom in the old lat removed
+ ---
+ What steps should we use to do this?
+
+ First we will test (null? lat) - The First Commandment
+ ---
+ And if (null? lat) is true?
+
+ Return ()
+ ---
+ What do we know if (null? lat) is not true?
+
+ We know that there must be at least one atom in the lat
+ ---
+ Is there any other question we should ask about the lat?
+
+ No. Either a lat is empty or it contains at least one atom
+ ---
+ What do we do if we know that the lat contains at least one atom?
+
+ We ask whether a is equal to (car lat)
+ ---
+ How do we ask qeustions?
+
+ By using
+ #+begin_src scheme
+   (cond
+    ()
+    ())
+ #+end_src
+ ---
+ How do we ask if a is the same as (car lat)
+
+ (eq? (car lat) a)
+ ---
+ What would be the value of (rember a lat) if a were the same as (car lat)
+
+ (cdr lat)
+ ---
+ What do we do if a is not the same as (car lat)
+
+ We want to keep (car lat), but also find out if a is somewhere in the rest of the lat
+ ---
+ How do we remove the first occurrence of a in the rest of lat
+
+ (rember a (cdr lat))
+ ---
+ Is there any other question we should ask?
+
+ No
+ ---
+ Now, let's write down what we have so far:
+ #+begin_src scheme
+   (define rember
+     (lambda (a lat)
+       (cond
+        ((null? lat) (quote ()))
+        (else (cond
+               ((eq? (car lat) a) (cdr lat))
+               (else (rember a
+                             (cdr lat))))))))
+ #+end_src
+ What is the value of (rember a lat) where a is bacon
+ and lat is (bacon lettuce and tomato)
+
+ (lettuce and tomato)
+ Hint: Write down the function rember and its arguments and refer to them as you go through the next sequence of questions
+ ---
+ Now, let's see if this function works. What is the first question?
+
+ (null? lat)
+ ---
+ (What do we do now?
+
+ Move to the next line and ask the next question
+ ---
+ else
+
+ Yes
+ ---
+ What next?
+
+ Ask the next question
+ ---
+ (eq? (car lat) a)
+
+ Yes, so the value is (cdr lat)
+ In this case, it is the list (lettuce and tomato)
+ ---
+ Is this the correct value?
+
+ Yes, because it is original list without the atom bacon
+ ---
+ But did we really use a good example?
+
+ Who knows? But the proof of the pudding is in the eating
+ so let's try another example
+ ---
+ What does rember do?
+
+ It takes an atom and a lat as its arguments
+ and makes a new lat with the first occurrence of the atom in the old lat removed
+ ---
+ What do we do now?
+
+ We compare each atom of the lat with the atom a, and if the comparison fails we build a list that begins with the atom we just compared
+ ---
+ What is the value of (rember a lat)
+ where a is and
+ and lat is (bacon lettuce and tomato)
+
+ (bacon lettuce tomato)
+ ---
+ Let us see if our function remeber works
+ What is the first question asked by rember
+
+ (null? lat)
+ ---
+ What do we do now?
+
+ Move to the next line, and ask the next questions
+ ---
+ else
+
+ Okay, so ask the next question
+ ---
+ (eq? (car lat) a)
+
+ No, so move to the next line
+ ---
+ What is the meaning of
+ (else (rember a (cdr lat)))
+
+ else asks if else is true - as it always is - and the rest of the line says to recur with a and (cdr lat),
+ where a is and
+ and (cdr lat) is (lettuce and tomato)
+ ---
+ (null? lat)
+
+ No, so move to the next line
+ ---
+ else
+
+ Sure
+ ---
+ (eq? (car lat) a)
+
+ No, so move to the next line
+ ---
+ What is the meaning of
+ (rember a (cdr lat))
+
+ Recur
+ where a is and
+ and (cdr lat) is (and tomato)
+ ---
+ (null? lat)
+
+ No, so move to the next line, and ask the next question
+ ---
+ else
+
+ Of course
+ ---
+ (eq? (car lat) a)
+
+ Yes
+ ---
+ (So what is the result?
+
+ (cdr lat) - (tomato)
+ ---
+ Is this correct?
+
+ No, since (tomato) is not the list (bacon lettuce and tomato)
+ with just a -and- removed
+ ---
+ What did we do wrong?
+
+ We dropped -and- but we also lost all the atoms preceding and
+ ---
+ How can we keep from losing the atoms bacon and lettuce
+
+ We use Cons the Magnificent. Remember cons, from chapter 1?
+ ---
+ The Second Commandment
+ Use cons to build lists
+ ---
+ Let's see what happens when we use cons
+ #+begin_src scheme
+   (define rember
+     (lambda (a lat)
+       (cond
+        ((null? lat) (quote ()))
+        (else (cond
+               ((eq? (car lat) a) (cdr lat))
+               (else (cons (car lat)
+                           (rember a
+                                   (cdr lat)))))))))
+ #+end_src
+ What is the value of (rember a lat)
+ where a is and
+ and
+ lat is (bacon lettuce and tomato)
+
+ (bacon lettuce tomato)
+ Hint: Make a copy of this function with cons and the arguments a and lat so you can refer to it for the following questions
+ ---
+ What is the first quesiton?
+
+ (null? lat)
+ ---
+ What do we do now?
+
+ Ask the next question
+ ---
+ else
+
+ Yes, of course
+ ---
+ (eq? (car lat) a)
+
+ No, so move to the next line
+ ---
+ What is the meaning of
+ (cons (car lat)
+  (rember a
+          (cdr lat)))
+ where
+ a is and
+ and
+ lat is (bacon lettuce and tomato)
+
+ It says to cons the car of lat -bacon- onto the value of (rember a (cdr lat))
+ But since we don't know the value of (rember a (cdr lat)) yet, we must find it before we can cons (car lat) onto it
+ ---
+ What is the meaning of (rember a (cdr lat))
+
+ This refers to the function with lat replaced by (cdr lat) - (lettuce and tomato)
+ ---
+ (null? lat)
+
+ No, so move to the next line
+ ---
+ else
+
+ Yes, ask the next question
+ ---
+ (eq? (car lat) a)
+
+ No so move the next line
+ ---
+ What is the meaning of
+ #+begin_src scheme
+   (cons (car lat)
+         (rember a
+                 (cdr lat)))
+ #+end_src
+
+ It says to cons the car of lat -lettuce- onto the value of (rember a (cdr lat))
+ But since we don't know the value of (rember a (cdr lat)) yet, we must find it before we can cons (car lat) onto it
+ ---
+ What is the meaning of (rember a (cdr lat))
+
+ This refers to the function with lat replaced by (cdr lat) that is (and tomato)
+ ---
+ (null? lat)
+
+ No, so ask the next question
+ ---
+ else
+
+ Still
+ ---
+ (eq? (car lat) a)
+
+ Yes
+ ---
+ What is the value of the line ((eq? (car lat) a) (cdr lat))
+
+ (cdr lat) - (tomato)
+ ---
+ Are we finished?
+
+ Certainly not! we know what (rember a lat) is when lat is (and tomato)
+ but we don't yet know what is when lat is (lettuce and tomato)
+ or (bacon lettuce and tomato)
+ ---
+ We now have a value for
+ (rember a (cdr lat))
+ where a is and
+ and
+ (cdr lat) is (and tomato)
+ This value is (tomato)
+ What next?
+
+ Recall that we wanted to cons lettuce onto the value of (rember a (cdr lat))
+ where a was -and- and (cdr lat) was (and tomato)
+ Now that we have this value, which is (tomato), we can cons lettuce onto it
+ ---
+ What is the result when we cons lettuce onto (tomato)
+
+ (lettuce tomato)
+ ---
+ What does (lettuce tomato) represent?
+
+ It represents the value of
+ #+begin_src scheme
+   (cons (car lat)
+         (rember a
+                 (cdr lat)))
+ #+end_src
+ when
+ lat is (lettcue and tomato)
+ and
+ (rember a (cdr lat)) is (tomato)
+ ---
+ Are we finished yes?
+
+ Not quite.
+ So far we know what (rember a lat) is when
+ lat is (lettuce and tomato)
+ but we don't yet know what it is when
+ lat is (bacon lettuce and tomato)
+ ---
+ We now have a value for (rember a (cdr lat))
+ where a is and
+ and
+ (cdr lat) is (lettuce and tomato)
+ This value is (lettuce tomato)
+ This is not the final value, so what must we do again?
+
+ Recall that, at one time, we wanted to cons bacon onto the value of (rember a (cdr lat)),
+ where
+ a was and
+ and
+ (cdr lat) was (lettuce and tomato)
+ Now that we have this value, which is (lettuce tomato)
+ we can cons bacon onto it
