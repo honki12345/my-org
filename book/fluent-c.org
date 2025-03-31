@@ -1,0 +1,70 @@
+* Fluent C
+** Preface
+If you have a lot of experience programming in C,
+you’ll learn the details of good design decisions and about their benefits and drawbacks.
+
+If you are fairly new to C programming,
+you’ll find guidance about design decisions,
+and you’ll see how these decisions are applied bit by bit to running code examples for building larger scale programs.
+*** Why I Wrote This Book
+This book teaches you how to advance your programming skills from writing basic C programs to writing larger-scale C programs
+that consider *error handling* and that are *flexible* regarding certain future changes in requirements and design
+*** Patterns Basics
+*** How to Read This Book
+*** Overview of the Patterns
+*** Conventions Used in This Book
+*** Using Code Examples
+*** O'Reilly Online Learning
+*** How to Contact Us
+*** Acknowledgements
+** Error Handling
+*** Running Example
+*** Function Split
+*** Guard Clause
+*** Samurai Principle
+*** Goto Error Handling
+*** Cleanup Record
+*** Object-Based Error Handling
+*** Summary
+*** Further Reading
+*** Outlook
+** Returning Error Information
+*** Running Example
+*** Return Status Codes
+*** Return Relevant Errors
+*** Special Return Values
+*** Log Errors
+*** Summary
+*** Further Reading
+*** Outlook
+** Memory Management
+*** Data Storage and Problems with Dynamic Memory
+*** Running Example
+*** Stack First
+*** Eternal Memory
+*** Lazy Cleanup
+*** Dedicated Ownership
+*** Allocation Wrapper
+*** Pointer Check
+*** Memory Pool
+*** Summary
+*** Further Reading
+*** Outlook
+** Returning Data From C Functions
+*** Running Example
+*** Return Value
+*** Out-Parameters
+*** Aggregate Instance
+*** Immutable Instance
+*** Caller-Owned Buffer
+*** Callee Allocates
+*** Summary
+*** Outlook
+** Data Lifetime And Ownership
+*** Stateless Software-Module
+*** Software-Module with Global State
+*** Caller-Owned Instance
+*** Shared Instance
+*** Summary
+*** Further Reading
+*** Outlook
