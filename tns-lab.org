@@ -14,3 +14,38 @@
 - IT 관련 학과, 수학과 졸업자면 좋습니다
 - Linux의 eBPF, DPDK에 대한 사전지식이 있으면 좋습니다
 - O/S에 대해 지식이 있으면 좋습니다
+***** 정리
+요구사항
+- C언어에 익숙(숙련도)
+  - 42 과제
+  - 모던 C
+  - (option) learn-c-hard-way
+  - (option) c-primer
+- 학부 수준의 네트워크 지식
+  - 컴퓨터 네트워킹 하향식 접근
+- Linux에 익숙(숙련도)
+  - Linux interface 책 정리
+  - APUE 책 정리
+
+우대사항
+- Rust 사용
+- Linux의 eBPF, DPDK 사전지식
+- O/S에 대한 지식
+  - 리눅스 커널 스터디
+***** 일정
+****** 4월
+- linux interface 일부분
+- APUE 일부분
+****** 5월
+- 모던 C
+****** 6월
+- 컴퓨터 네트워킹 하향식 접근
+****** 7월
+****** 8월
+****** 9월
+****** 10월
+****** 남은 것
+- linux interface
+- APUE
+- Rust
+- Linux의 eBPF, DPDK 사전지식
