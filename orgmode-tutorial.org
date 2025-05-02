@@ -1,0 +1,159 @@
+* OrgMode tutorial
+[[https://youtube.com/playlist?list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&si=j9n34N33DRjZXuX_]]
+** headlines & outline mode
+SCHEDULED: <2025-03-21 금>
+Every headline starts with one or more *
+---
+Visibility of the headline hierarchy:
+Local visibility cycling with ~tab~
+Global visibility cycling with ~shift~ ~tab~
+---
+Increase or decrease level with ~alt~ ~right~ or ~left~
+---
+Move up/down within a level with ~alt~ ~up~ or ~down~
+---
+Move a headline under another top level headline:
+Cursor on the headline and then ~C-c~ ~C-w~
+---
+** ToDo keywords
+Default is ~TODO~ and ~DONE~
+---
+Cycling through them with ~shift right~ or ~left~
+---
+More keywords can be defined with a line
+~#+SEQ_TODO:~
+---
+Items left of ~|~ are ToDo items
+Items right of ~|~ are DONE items
+---
+Activate line with ~C-c C-c~
+---
+Get a menu of all keywords: ~C-c C-w~
+** Schedule, deadlines & agenda views
+Scheduling: `C-c C-s` (org-schedule)
+---
+Deadlines: `C-c C-d` (org-deadline)
+---
+Switch to agenda view with `C-a a`
+---
+Follow mode with `S-f`
+---
+Move forward with ~f~
+Move backward with ~b~
+** Tags
+Tags can be added to *headlines*
+and often used as a way to mark GTD contexts
+---
+Tags can be predefined with a line
+~#+TAGS:PHONE(o)...~
+at the beginning of the file
+---
+To assign tags to a headline use ~C-c C-Q~
+---
+If you have predefined tags with keys assigned,
+you see a menu, but you still can enter free tags by pressing ~tab~
+Finish definition with ~Enter~
+** Agenda view
+* OrgMode guide
+[[https://orgmode.org/guide/index.html#SEC_Contents]]
+** Introduction
+
+** Document Structure
+*** Headlines
+*** Visibility Cycling
+*** Motion
+*** Structure Editing
+*** Sparse Trees
+*** Plain Lists
+
+** Tables
+
+** Hyperlinks
+
+** TODO Items
+*** Basic TODO Functionality
+** Tags
+
+** Properties
+
+** Dates and Times
+*** Timestamps
+*** Creating Timestamps
+*** Deadlines and Scheduling
+*** Clocking Work Time
+
+** Capture, Refile, Archive
+*** Capture
+*** Refile and Copy
+*** Archiving
+
+** Agenda Views
+SCHEDULED: <2025-03-21 금>
+*** Agenda Files
+the files listed in the variable *org-agenda-files*
+**** C-c [ (org-agenda-file-to-front)
+Add current file to the list of agenda files.
+The file is added to the front of the list.
+If it was already in the list, it is moved to the front.
+With a prefix argument, file is added/moved to the end.
+**** C-c ] (org-remove-file)
+**** C-, (org-cycle-agenda-files)
+*** The Agenda Dispatcher
+*** The Weekly/Daily Agenda
+*** The Global TODO List
+*** Matching Tags and Properties
+*** Search View
+*** Commands in the Agenda Buffer
+**** Motion
+n (org-agenda-next-line)
+    Next line (same as DOWN and C-n).
+
+p (org-agenda-previous-line)
+    Previous line (same as UP and C-p).
+**** View/Go to Org file
+SPC or mouse-3 (org-agenda-show-and-scroll-up)
+    Display the original location of the item in another window. With a prefix argument, make sure that drawers stay folded.
+
+L (org-agenda-recenter)
+    Display original location and recenter that window.
+
+TAB or mouse-2 (org-agenda-goto)
+    Go to the original location of the item in another window.
+
+RET (org-agenda-switch-to)
+    Go to the original location of the item and delete other windows.
+
+F (org-agenda-follow-mode)
+    Toggle Follow mode. In Follow mode, as you move point through the agenda buffer, the other window always shows the corresponding location in the Org file. The initial setting for this mode in new agenda buffers can be set with the variable org-agenda-start-with-follow-mode.
+
+C-c C-x b (org-agenda-tree-to-indirect-buffer)
+    Display the entire subtree of the current item in an indirect buffer. With a numeric prefix argument N, go up to level N and then take that tree. If N is negative, go up that many levels. With a C-u prefix, do not remove the previously used indirect buffer.
+
+C-c C-o (org-agenda-open-link)
+    Follow a link in the entry. This offers a selection of any links in the text belonging to the referenced Org node. If there is only one link, follow it without a selection prompt. 
+*** Custom Agenda Views
+
+** Markup for Rich Contents
+*** Paragraphs
+*** Emphasis and Monospace
+*** Embedded LaTeX
+*** Literal examples
+*** Images
+*** Creating Footnotes
+
+** Exporting
+*** The Export Dispatcher
+*** Export Settings
+*** Table of Contents
+*** Include Files
+*** Comment Lines
+*** ASCII/UTF-8 Export
+*** HTML Export
+*** LaTeX Export
+*** iCalendar Export
+
+** Publishing
+
+** Working with Source Code
+
+** Miscellaneous

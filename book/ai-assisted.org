@@ -1,0 +1,230 @@
+* Learn AI-Assisted Python Programming
+** Contents
+** Foreword
+ until recently, when learning programming,
+ you had no equivalent of a stand mixer or grammar *check to support you*
+ And there are *lots of tedious things to learn and remember* when you start programming.
+
+ there are different skills you will need to focus on when programming with Copilot,
+ specifically *problem decomposition and debugging*
+** Acknowledgments
+** Introduction
+Skills such as
+- problem decomposition,
+- code specification,
+- code reading,
+- code testing
+have become even more important than they were in the past;
+
+skills such as
+- knowing library semantics
+- syntax
+become less important.
+
+*** The challenge in working with AI assistants
+So even if you use the exact same prompts we do,
+you’ll likely see *different code responses* than we do.
+
+Much of this book is devoted to ensuring you learn how to *determine* whether the answer from GitHub Copilot is right or not and,
+if it isn’t, how to fix it
+** About the Authors
+** About the Cover Illustration
+** Introducing AI-assisted programming with GitHub Copilot
+*** This chapter covers
+- How AI assistants change how new programmers learn
+- Why programming is never going to be the same
+- How AI assistants such as GitHub Copilot work
+- Possible perils of AI-assisted programming
+
+*** Improving how we talk to computers
+**** Making it a little easier
+**** Making it a lot easier
+*** About the technology
+**** Python, your programming language
+There are other programming languages as well, such as Java, C++, Rust,
+and many others. Copilot works with those, too,
+but at the time of this writing,
+*it(copilot) works really well with Python.*
+**** GitHub Copilot, your AI assistant
+What is an AI assistant?
+An AI assistant is an AI agent that helps you get work done.
+An AI assistant is just a computer program that responds to typical human inputs such as speech and text with human-like answers.
+
+Copilot is an AI assistant with a specific job:
+*it converts English into computer programs* (along with a whole lot more, as we’ll soon see).
+**** How Copilot works behind the scenes—in 30 seconds
+The brain behind Copilot is a fancy computer program called a large language model (LLM).
+An LLM stores information about relationships between words, including which words make sense in certain contexts, and uses this to predict the best sequence of words to respond to a prompt.
+*** How Copilot changes how we learn to program
+*** What else can Copilot do for us?
+*** Risks and challenges when using Copilot
+*** The skills we need
+*** Societal concerns about AI code assistants like Copilot
+** Getting started with Copilot
+*** Setting up your computer to start learning
+*** The software we'll be using
+**** Python
+**** Visual Studio Code
+**** GitHub account
+*** Getting your system set up: Part 1
+*** Working with Python in Visual Studio Code
+**** Set up your working folder
+**** Check to see if your setup is working properly
+*** Writing and running some small programs
+*** Getting your system set up: Part 2
+**** Check to see if Copilot is working properly
+*** Addressing common Copilot challenges
+*** Our path forward
+**** How we'll be working with Copilot throughout the book
+**** Showcasing Copilot's value in a data processing task
+** Designing functions
+*** Functions
+**** The components of a function
+**** Using a function
+*** The design cycle of functions with Copilot
+*** Examples of creating good functions with Copilot
+**** Dan's stock pick
+**** Leo's password
+**** Getting a strong password
+**** Scrabble scoring
+**** The best word
+*** Benefits of functions
+*** Roles of functions
+*** What's a reasonable task for a function?
+**** Attributes of good functions
+**** Examples of good (and bad) leaf functions
+*** Exercises
+** Reading Python code: Part 1
+*** Why we need to read code
+*** Asking Copilot to explain code
+*** Top 10 programming features you need to know: Part 1
+**** Functions
+**** Variables
+**** Conditionals
+**** Strings
+**** Lists
+*** Exercises
+** Reading Python code: Part 2
+*** Top 10 programming features you need to know: Part 2
+**** Loops
+**** Indentation
+**** Dictionaries
+**** Files
+**** Modules
+*** Exercises
+** Testing and prompt engineering
+*** Why it's crucial to test code
+*** Closed-box and open-box testing
+**** Closed-box testing
+**** How do we know which test cases to use?
+**** Open-box testing
+*** How to test your code
+**** Testing using the Python prompt
+**** Testing in your Python file (we won't be doing it this way)
+**** doctest
+*** Revisiting the cycle of designing functions with Copilot
+*** Full testing example
+**** Finding the most students we can add to a row
+**** Improving the prompt to find a better solution
+**** Testing the new solution
+*** Another full testing example: Testing with files
+**** What tests should we run?
+**** Creating the function
+**** Testing the function
+**** Common challenges with doctest
+*** Exercises
+** Problem decomposition
+*** Problem decomposition
+*** Small examples of top-down design
+*** Spelling suggestions
+*** Spelling suggestions using top-down design
+*** Breaking down the process subproblem
+**** Getting the list of words from the word list file
+**** Generating the list of all possible words
+**** Generating the list of all real words
+*** Summary of our top-down design
+*** Implementing our functions
+**** create_word_list
+**** add_letter
+**** delete_letter
+**** change_letter
+**** all_possible_words
+**** all_real_words
+**** get_spelling_suggestions
+**** spell_check
+*** Exercises
+** Debugging and better understanding your code
+*** What causes errors (bugs)?
+*** How to find the bug
+**** Using print statements to learn about the code behavior
+**** Using VS Code's debugger to learn about the code behavior
+*** How to fix a bug (once found)
+**** Asking Copilot to fix your bug via Copilot Chat
+**** Giving Copilot a new prompt for the whole function
+**** Giving Copilot a targeted prompt for part of a function
+**** Modifying the code to fix the bug yourself
+*** Modifying our workflow in light of our new skills
+*** Applying our debugging skills to a new problem
+*** Using the debugger to better understand code
+*** A caution about debugging
+*** Exercises
+** Automating tedious tasks
+*** Why programmers make tools
+*** How to use Copilot to write tools
+*** Example 1: Cleaning up email text
+**** Conversing with Copilot
+**** Writing the tool to clean up email
+*** Example 2: Adding cover pages to PDF files
+**** Conversing with Copilot
+**** Writing the tool
+*** Example 3: Merging phone picture libraries
+**** Conversing with Copilot
+**** Top-down design
+**** Writing the tool
+*** Exercises
+** Making some games
+*** Game programs
+*** Adding randomness
+*** Example 1: Bulls and Cows
+**** How the game works
+**** Top-down design
+**** Parameters and return types
+**** Implementing our functions
+**** Adding a graphical interface for Bulls and Cows
+*** Example 2: Bogart
+**** How the game works
+**** Top-down design
+**** Implementing our functions
+*** Exercises
+** Creating an authorship identification program
+*** Authorship identification
+*** Authorship identification using top-down design
+*** Breaking down the process subproblem
+**** Figuring out the signature for the mystery book
+*** Summary of our top-down design
+*** Implementing our functions
+**** clean_word
+**** average_word_length
+**** different_to_total
+**** exactly_once_to_total
+**** split_string
+**** get_sentences
+**** average_sentence_length
+**** get_phrases
+**** average_sentence_complexity
+**** make_signature
+**** get_all_signatures
+**** get_score
+**** lowest_score
+**** process_data
+**** make_guess
+*** Going further
+*** Exercises
+** Future directions
+*** Prompt patterns
+**** Flipped interaction pattern
+**** Persona pattern
+*** Limitations and future directions
+**** Where Copilot (currently) struggles
+**** Is Copilot a new programming language?
+*** Exercises
