@@ -1,8 +1,16 @@
 * programming ruby
 ** Preface
 *** Why Ruby?
+You can concentrate on solving the problem at hand, instead of struggling with compiler and language issues. 
 *** A Word about Ruby Versions
 *** Notation Conventions
+- instance method
+  - ~Fred#do_somehting~
+- class method
+  - ~Fred.new~
+  - ~Fred::new~
+- class constant
+  - ~Fred.EOF~
 *** Road Map
 *** Resources
 ** Acknowledgments
@@ -11,8 +19,18 @@
 **** Installing Ruby
 **** Installing Ruby for Windows
 **** Running Ruby
+Interactive Ruby, *irb* is the tool of choice for executing Ruby interactively
+Irb is a complete Ruby shell, with command-line history, line-editing capabilities, and job control.
+***** What about Docker?
+Docker is a tool that allows you to define and run *containers*
+A container is a way to package all the dependencies needed to run code - it's virtual operating system inside your computer
 **** Creating Ruby Programs
 **** Getting More Information about Ruby
+***** ri
+command-line tool for the Ruby core documentation
+
+To find the documentation for a class, method
+~ri '<classname or method>~
 **** What's Next
 *** Ruby.new
 **** Ruby Is an Object-Oriented Language
