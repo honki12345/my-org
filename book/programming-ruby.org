@@ -34,9 +34,52 @@ To find the documentation for a class, method
 **** What's Next
 *** Ruby.new
 **** Ruby Is an Object-Oriented Language
+The standard constructor is called *new* .
+
+Every object has a unique object identifier
+(abbreviated as object id), accessible via the property object_id
+
+The item before the dot is called the *receiver* of the method, and what comes after the period is the name of the method to be invoked.
+
+When we talk about methods being sent, we often say that we send a *message* to the object
 **** Some Basic Ruby
+In the double-quoted case,
+First, it looks for *substitution* sequences that start with a backslash character and replaces them with some binary value (e.g. '\n')
+The second thing that Ruby does with double-quoted strings is expression interpolation. Within the string, the sequence #{EXPRESSION} is replaced by the value of EXPRESSION
+
+In the absence of an explicit return statement, the value returned by a Ruby method is the value of the last expression evaluated
+
+Local Variable: name
+Instance Variable: @name
+Class Variable: @@name
+Global Variable: $name
+Class Name: Name
+Constant Name: YOUR_NAME
 **** Arrays and Hashes
+An *Array* is a linear list of objects, you retrieve them via their index
+
+A *Hash* is an association,
+- Most generically, the key and value are separated by *=>*
+- The *order* of the keys in the hash is stable and will always match the order in which the keys were added to the hash.
+- The default behavior of a hash when indexed by a key it doesn’t contain is to return *nil*
+- This can be done by specifying a default value when you create a new, empty hash:
+#+begin_src ruby
+  histogram = Hash.new(0)       # The default value is zero
+  histogram["ruby"]             # => 0
+#+end_src
+
+*nil* is an object, just like any other. It’s an object that represents the concept of nothing
 **** Symbols
+*Symbols* are meant to be used as keys and identifiers,
+while *strings* are meant to be used for data.
+
+A symbol literal starts with a colon
+- We don’t need to declare the symbols or assign them a value
+- The value of a symbol is equivalent to its name.
+- no matter where they appear in your program, symbols with the same name will have the same value—indeed,
+  they’ll be the same internal object.
+
+You can use ~name: value~ pairs to create a hash instead of ~name => value~ if the key is a symbol:
 **** Control Structures
 **** Regular Expressions
 **** Blocks
